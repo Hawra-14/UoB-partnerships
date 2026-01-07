@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>International Partnerships - University of Bahrain</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>University of Bahrain</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="Home.html" class="nav-link">HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a href="partners.html" class="nav-link active">PARTNERSHIP</a>
+                </li>
+                <li class="nav-item">
+                    <a href="leaders.html" class="nav-link">LEADERS</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>International Partnerships & Agreements</h1>
+            <p>Explore our global network of academic partnerships and collaborative agreements</p>
+        </div>
+    </section>
+
+    <!-- Search and Filter Section -->
+    <section class="search-filter-section">
+        <div class="container">
+            <div class="search-filter-container">
+                <div class="search-box">
+                    <input type="text" id="searchInput"
+                        placeholder="🔍 Search by institution name, country, or keyword..." class="search-input">
+                </div>
+
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label for="regionFilter">Region:</label>
+                        <select id="regionFilter" class="filter-select">
+                            <option value="all">All Regions</option>
+                            <option value="middle-east">Middle East</option>
+                            <option value="europe">Europe</option>
+                            <option value="asia">Asia</option>
+                            <option value="north-america">North America</option>
+                            <option value="africa">Africa</option>
+                            <option value="oceania">Oceania</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="typeFilter">Partnership Type:</label>
+                        <select id="typeFilter" class="filter-select">
+                            <option value="all">All Types</option>
+                            <option value="academic">Academic Exchange</option>
+                            <option value="research">Research Collaboration</option>
+                            <option value="dual-degree">Dual Degree Program</option>
+                            <option value="mou">Memorandum of Understanding</option>
+                            <option value="joint-research">Joint Research Projects</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="sdgFilter">SDG Goal:</label>
+                        <select id="sdgFilter" class="filter-select">
+                            <option value="all">All SDGs</option>
+                            <option value="SDG 2">SDG 2: Zero Hunger</option>
+                            <option value="SDG 3">SDG 3: Good Health and Well-being</option>
+                            <option value="SDG 4">SDG 4: Quality Education</option>
+                            <option value="SDG 5">SDG 5: Gender Equality</option>
+                            <option value="SDG 6">SDG 6: Clean Water and Sanitation</option>
+                            <option value="SDG 7">SDG 7: Affordable and Clean Energy</option>
+                            <option value="SDG 8">SDG 8: Decent Work and Economic Growth</option>
+                            <option value="SDG 9">SDG 9: Industry, Innovation and Infrastructure</option>
+                            <option value="SDG 10">SDG 10: Reduced Inequalities</option>
+                            <option value="SDG 11">SDG 11: Sustainable Cities and Communities</option>
+                            <option value="SDG 12">SDG 12: Responsible Consumption and Production</option>
+                            <option value="SDG 13">SDG 13: Climate Action</option>
+                            <option value="SDG 14">SDG 14: Life Below Water</option>
+                            <option value="SDG 15">SDG 15: Life on Land</option>
+                            <option value="SDG 16">SDG 16: Peace, Justice and Strong Institutions</option>
+                            <option value="SDG 17">SDG 17: Partnerships for the Goals</option>
+                        </select>
+                    </div>
+
+                    <button id="resetFilters" class="reset-btn">Reset Filters</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="container">
+            <h2 class="section-title">Partnership Network</h2>
+            <div class="map-container">
+                <div id="partnershipMap"></div>
+                <div class="map-legend">
+                    <h4>Legend</h4>
+                    <div class="legend-item">
+                        <span class="legend-marker academic-marker"></span>
+                        <span>Academic Exchange</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-marker research-marker"></span>
+                        <span>Research Collaboration</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-marker dual-marker"></span>
+                        <span>Dual Degree Program</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-marker mou-marker"></span>
+                        <span>MOU</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats-bar-section">
+        <div class="container">
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-label">Countries</span>
+                    <span class="stat-number" id="countriesCount">12</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Relations</span>
+                    <span class="stat-number" id="relationsCount">13</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Programmes</span>
+                    <span class="stat-number" id="programmesCount">5</span>
+                </div>
+                <div class="map-toggle">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="showMapToggle" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                    <span>Show Map</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnerships List Section with Sidebar Layout -->
+    <section class="partnerships-list-section">
+        <div class="container-full">
+            <div class="partnerships-layout">
+                <!-- Left Sidebar - Countries List -->
+                <div class="sidebar-container">
+                    <div id="countriesSidebar" class="countries-sidebar">
+                        <!-- Will be populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Right Content - Partnership Details -->
+                <div class="content-container">
+                    <div id="partnershipDetail" class="partnership-detail-container">
+                        <div class="empty-state">
+                            <div class="empty-icon">🎓</div>
+                            <h3>Select a partnership to view details</h3>
+                            <p>Click on any institution from the list on the left to see detailed information</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 University of Bahrain. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Partnerships data with SDG information (no lat/lng needed)
+        // Partnerships data with coordinates for each partnership
+        const partnershipsData = [
+            {
+                id: 'kfupm',
+                name: 'King Fahd University of Petroleum & Minerals',
+                country: 'Saudi Arabia',
+                countryCode: 'sa',
+                region: 'middle-east',
+                type: 'academic',
+                agreementType: 'Academic Exchange & Joint Research',
+                startDate: 'January 2015',
+                focusAreas: 'Engineering, Petroleum Studies, Technology',
+                description: 'Comprehensive partnership enabling student and faculty exchange programs, collaborative research in petroleum engineering, and joint degree programs. Annual exchange of 15-20 students with full academic credit transfer.',
+                sdgs: ['SDG 4: Quality Education', 'SDG 7: Affordable and Clean Energy', 'SDG 9: Industry, Innovation and Infrastructure'],
+                metrics: {
+                    studentsExchanged: '120+',
+                    publications: '8',
+                    programs: '3'
+                },
+                lat: 26.3099,
+                lng: 50.1370
+            },
+            {
+                id: 'manchester',
+                name: 'University of Manchester',
+                country: 'United Kingdom',
+                countryCode: 'gb',
+                region: 'europe',
+                type: 'dual-degree',
+                agreementType: 'Dual Degree & Research Partnership',
+                startDate: 'September 2012',
+                focusAreas: 'Business, Computer Science, Life Sciences',
+                description: 'Strategic alliance offering dual degree programs where students earn degrees from both institutions. Includes faculty exchange, joint PhD supervision, and collaborative research initiatives in emerging technologies.',
+                sdgs: ['SDG 4: Quality Education', 'SDG 8: Decent Work and Economic Growth', 'SDG 9: Industry, Innovation and Infrastructure'],
+                metrics: {
+                    dualDegrees: '45',
+                    jointProjects: '12',
+                    exchangePrograms: '5'
+                },
+                lat: 53.4668,
+                lng: -2.2339
+            },
+            {
+                id: 'mit',
+                name: 'Massachusetts Institute of Technology (MIT)',
+                country: 'United States',
+                countryCode: 'us',
+                region: 'north-america',
+                type: 'research',
+                agreementType: 'Research Collaboration Agreement',
+                startDate: 'March 2018',
+                focusAreas: 'AI, Robotics, Sustainable Energy, Materials Science',
+                description: 'Research-focused partnership concentrating on cutting-edge technology and innovation. Joint laboratories, funded research projects, and access to MIT\'s advanced research facilities for UoB faculty and graduate students.',
+                sdgs: ['SDG 7: Affordable and Clean Energy', 'SDG 9: Industry, Innovation and Infrastructure', 'SDG 13: Climate Action'],
+                metrics: {
+                    activeProjects: '15',
+                    funding: '$2.5M',
+                    publications: '25'
+                },
+                lat: 42.3601,
+                lng: -71.0589
+            },
+            {
+                id: 'stanford',
+                name: 'Stanford University',
+                country: 'United States',
+                countryCode: 'us',
+                region: 'north-america',
+                type: 'academic',
+                agreementType: 'Academic Exchange & Research Partnership',
+                startDate: 'September 2019',
+                focusAreas: 'Computer Science, Business, Engineering',
+                description: 'Comprehensive partnership focusing on technology innovation and entrepreneurship. Student exchange programs, joint research in artificial intelligence and machine learning, and collaborative startup incubation initiatives.',
+                sdgs: ['SDG 4: Quality Education', 'SDG 8: Decent Work and Economic Growth', 'SDG 9: Industry, Innovation and Infrastructure'],
+                metrics: {
+                    studentsExchanged: '60',
+                    jointProjects: '8',
+                    startups: '3'
+                },
+                lat: 37.4275,
+                lng: -122.1697
+            },
+            {
+                id: 'chico',
+                name: 'California State University, Chico',
+                country: 'United States',
+                countryCode: 'us',
+                region: 'north-america',
+                type: 'academic',
+                agreementType: 'Academic Exchange Program',
+                startDate: 'August 2020',
+                focusAreas: 'Environmental Science, Agriculture, Education',
+                description: 'Partnership focused on sustainability and environmental studies. Student exchange opportunities, faculty collaboration in agricultural research, and joint environmental conservation projects. Emphasis on sustainable farming practices and ecological preservation.',
+                sdgs: ['SDG 2: Zero Hunger', 'SDG 4: Quality Education', 'SDG 13: Climate Action', 'SDG 15: Life on Land'],
+                metrics: {
+                    studentsExchanged: '30',
+                    researchProjects: '4',
+                    workshops: '6'
+                },
+                lat: 39.7285,
+                lng: -121.8375
+            },
+            {
+                id: 'nus',
+                name: 'National University of Singapore',
+                country: 'Singapore',
+                countryCode: 'sg',
+                region: 'asia',
+                type: 'academic',
+                agreementType: 'Student & Faculty Exchange',
+                startDate: 'August 2016',
+                focusAreas: 'Business, Engineering, Public Policy',
+                description: 'Student mobility program with semester and year-long exchange options. Focus on business administration, engineering, and interdisciplinary programs. Includes summer school programs and joint workshops.',
+                sdgs: ['SDG 4: Quality Education', 'SDG 16: Peace, Justice and Strong Institutions', 'SDG 17: Partnerships for the Goals'],
+                metrics: {
+                    studentsExchanged: '85',
+                    summerPrograms: '4',
+                    facultyVisits: '10'
+                },
+                lat: 1.2966,
+                lng: 103.7764
+            },
+            {
+                id: 'sorbonne',
+                name: 'Sorbonne University',
+                country: 'France',
+                countryCode: 'fr',
+                region: 'europe',
+                type: 'mou',
+                agreementType: 'Memorandum of Understanding',
+                startDate: 'May 2014',
+                focusAreas: 'Humanities, Languages, Cultural Studies',
+                description: 'Cultural and academic partnership promoting French language education, humanities exchange, and collaborative research in literature and social sciences. Includes visiting professor programs and joint conferences.',
+                sdgs: ['SDG 4: Quality Education', 'SDG 10: Reduced Inequalities', 'SDG 17: Partnerships for the Goals'],
+                metrics: {
+                    facultyExchanges: '30',
+                    conferences: '6',
+                    studentsParticipated: '50+'
+                },
+                lat: 48.8566,
+                lng: 2.3522
+            },
+            {
+                id: 'uaeu',
+                name: 'United Arab Emirates University',
+                country: 'United Arab Emirates',
+                countryCode: 'ae',
+                region: 'middle-east',
+                type: 'joint-research',
+                agreementType: 'Joint Research & Academic Cooperation',
+                startDate: 'January 2017',
+                focusAreas: 'Renewable Energy, Water Resources, Agriculture',
+                description: 'Regional collaboration focusing on Gulf-specific challenges including water scarcity, sustainable agriculture, and renewable energy solutions. Joint research centers and shared laboratory facilities.',
+                sdgs: ['SDG 2: Zero Hunger', 'SDG 6: Clean Water and Sanitation', 'SDG 7: Affordable and Clean Energy', 'SDG 13: Climate Action'],
+                metrics: {
+                    jointProjects: '18',
+                    funding: '$1.8M',
+                    publications: '32'
+                },
+                lat: 24.1953,
+                lng: 55.7529
+            },
+            {
+                id: 'utokyo',
+                name: 'University of Tokyo',
+                country: 'Japan',
+                countryCode: 'jp',
+                region: 'asia',
+                type: 'academic',
+                agreementType: 'Academic Exchange & Cultural Programs',
+                startDate: 'April 2015',
+                focusAreas: 'Engineering, Natural Sciences, Japanese Studies',
+                description: 'Exchange program with focus on engineering and science fields. Cultural immersion components and Japanese language training. Currently under renewal discussions to expand program scope.',
+                sdgs: ['SDG 4: Quality Education', 'SDG 9: Industry, Innovation and Infrastructure', 'SDG 11: Sustainable Cities and Communities'],
+                metrics: {
+                    studentsExchanged: '42',
+                    workshops: '3',
+                    facultyExchanges: '8'
+                },
+                lat: 35.7128,
+                lng: 139.7627
+            },
+            {
+                id: 'tum',
+                name: 'Technical University of Munich',
+                country: 'Germany',
+                countryCode: 'de',
+                region: 'europe',
+                type: 'research',
+                agreementType: 'Research Partnership & PhD Programs',
+                startDate: 'October 2019',
+                focusAreas: 'Automotive Engineering, AI, Sustainable Technology',
+                description: 'Advanced research collaboration in engineering and technology. Joint PhD programs, research internships, and access to specialized laboratories. Focus on Industry 4.0 and smart manufacturing.',
+                sdgs: ['SDG 9: Industry, Innovation and Infrastructure', 'SDG 11: Sustainable Cities and Communities', 'SDG 12: Responsible Consumption and Production'],
+                metrics: {
+                    phdStudents: '12',
+                    researchProjects: '7',
+                    publications: '18'
+                },
+                lat: 48.1497,
+                lng: 11.5683
+            },
+            {
+                id: 'sydney',
+                name: 'University of Sydney',
+                country: 'Australia',
+                countryCode: 'au',
+                region: 'oceania',
+                type: 'academic',
+                agreementType: 'Student Exchange & Study Abroad',
+                startDate: 'February 2020',
+                focusAreas: 'Medicine, Health Sciences, Marine Biology',
+                description: 'Comprehensive exchange program offering semester and year-long opportunities. Special focus on health sciences and medical research. Study abroad programs with cultural orientation and academic support.',
+                sdgs: ['SDG 3: Good Health and Well-being', 'SDG 4: Quality Education', 'SDG 14: Life Below Water'],
+                metrics: {
+                    studentsExchanged: '35',
+                    studyAbroadPrograms: '2',
+                    workshops: '5'
+                },
+                lat: -33.8886,
+                lng: 151.1873
+            },
+            {
+                id: 'umelb',
+                name: 'University of Melbourne',
+                country: 'Australia',
+                countryCode: 'au',
+                region: 'oceania',
+                type: 'research',
+                agreementType: 'Research Collaboration & PhD Programs',
+                startDate: 'March 2019',
+                focusAreas: 'Engineering, Environmental Science, Business',
+                description: 'Research partnership focusing on innovation and sustainability. Joint PhD supervision, research exchanges, and collaborative projects in environmental engineering and business innovation.',
+                sdgs: ['SDG 8: Decent Work and Economic Growth', 'SDG 9: Industry, Innovation and Infrastructure', 'SDG 13: Climate Action', 'SDG 15: Life on Land'],
+                metrics: {
+                    phdStudents: '8',
+                    jointProjects: '5',
+                    publications: '15'
+                },
+                lat: -37.7964,
+                lng: 144.9612
+            },
+            {
+                id: 'qatar',
+                name: 'Qatar University',
+                country: 'Qatar',
+                countryCode: 'qa',
+                region: 'middle-east',
+                type: 'mou',
+                agreementType: 'Memorandum of Understanding',
+                startDate: 'September 2018',
+                focusAreas: 'Gulf Studies, Education, Social Sciences',
+                description: 'Regional partnership promoting Gulf cooperation in higher education. Joint conferences, faculty exchange, and collaborative research on regional development and social issues specific to Gulf countries.',
+                sdgs: ['SDG 4: Quality Education', 'SDG 10: Reduced Inequalities', 'SDG 16: Peace, Justice and Strong Institutions', 'SDG 17: Partnerships for the Goals'],
+                metrics: {
+                    facultyVisits: '25',
+                    conferences: '8',
+                    activities: '40+'
+                },
+                lat: 25.3754,
+                lng: 51.4906
+            },
+            {
+                id: 'auc',
+                name: 'American University in Cairo',
+                country: 'Egypt',
+                countryCode: 'eg',
+                region: 'africa',
+                type: 'academic',
+                agreementType: 'Academic Cooperation & Exchange',
+                startDate: 'January 2016',
+                focusAreas: 'Middle Eastern Studies, Business, Arts',
+                description: 'Academic partnership focusing on regional studies and cultural exchange. Student mobility programs, faculty collaboration, and joint research on Middle Eastern history and contemporary issues.',
+                sdgs: ['SDG 4: Quality Education', 'SDG 5: Gender Equality', 'SDG 16: Peace, Justice and Strong Institutions'],
+                metrics: {
+                    studentsExchanged: '55',
+                    programs: '4',
+                    facultyExchanges: '12'
+                },
+                lat: 30.0199,
+                lng: 31.4996
+            },
+            {
+                id: 'snu',
+                name: 'Seoul National University',
+                country: 'South Korea',
+                countryCode: 'kr',
+                region: 'asia',
+                type: 'dual-degree',
+                agreementType: 'Dual Degree & Research Partnership',
+                startDate: 'March 2021',
+                focusAreas: 'Electronics, Computer Science, International Relations',
+                description: 'Innovative dual degree program in engineering and technology fields. Students spend time at both institutions, earning recognized degrees from each. Includes research opportunities and industry connections in South Korea\'s tech sector.',
+                sdgs: ['SDG 4: Quality Education', 'SDG 9: Industry, Innovation and Infrastructure', 'SDG 17: Partnerships for the Goals'],
+                metrics: {
+                    dualDegrees: '22',
+                    jointProjects: '6',
+                    exchangePrograms: '3'
+                },
+                lat: 37.4601,
+                lng: 126.9520
+            }
+        ];
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            if (!document.getElementById('countriesSidebar')) return;
+
+            let map;
+            let markers = [];
+            let filteredPartnerships = [...partnershipsData];
+
+            // Initialize map
+            initializeMap();
+
+            // Build sidebar
+            buildSidebar();
+
+            // Update stats
+            updateStatistics();
+
+            // Setup event listeners
+            setupFilters();
+            setupMapToggle();
+
+            function initializeMap() {
+                map = L.map('partnershipMap', {
+                    center: [26.0667, 50.5577],
+                    zoom: 2,
+                    minZoom: 1,
+                    maxZoom: 18,
+                    worldCopyJump: false
+                });
+
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+                    maxZoom: 19
+                }).addTo(map);
+
+                addMarkers();
+
+                setTimeout(() => map.invalidateSize(), 250);
+            }
+
+            function getMarkerColor(type) {
+                const colors = {
+                    'academic': '#003f7f',
+                    'research': '#2a9d8f',
+                    'dual-degree': '#9b59b6',
+                    'mou': '#f77f00',
+                    'joint-research': '#e74c3c'
+                };
+                return colors[type] || '#003f7f';
+            }
+
+            function addMarkers() {
+                markers = [];
+
+                // Group partnerships by COUNTRY (not location)
+                const partnershipsByCountry = {};
+                partnershipsData.forEach(partnership => {
+                    if (!partnershipsByCountry[partnership.country]) {
+                        partnershipsByCountry[partnership.country] = [];
+                    }
+                    partnershipsByCountry[partnership.country].push(partnership);
+                });
+
+                // Create markers for each unique country
+                const processedCountries = new Set();
+
+                partnershipsData.forEach(partnership => {
+                    // Skip if we've already created a marker for this country
+                    if (processedCountries.has(partnership.country)) {
+                        return;
+                    }
+                    processedCountries.add(partnership.country);
+
+                    // Get coordinates - use first partnership's coordinates for the country marker
+                    if (!partnership.lat || !partnership.lng) {
+                        console.warn(`Coordinates not found for ${partnership.country}`);
+                        return;
+                    }
+
+                    const coords = { lat: partnership.lat, lng: partnership.lng };
+
+                    // Get all partnerships for this country
+                    const countryPartnerships = partnershipsByCountry[partnership.country];
+                    const partnershipCount = countryPartnerships.length;
+
+                    // Use the first partnership's type for the marker color
+                    const color = getMarkerColor(partnership.type);
+
+                    // Create marker HTML based on count
+                    const clusteredMarkerHTML = partnershipCount > 1
+                        ? `<div style="background-color: ${color}; width: 35px; height: 35px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;">
+                ${partnershipCount}
+            </div>`
+                        : `<div style="background-color: ${color}; width: 20px; height: 20px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 10px rgba(0,0,0,0.3);"></div>`;
+
+                    const iconSize = partnershipCount > 1 ? [35, 35] : [20, 20];
+                    const iconAnchor = partnershipCount > 1 ? [17.5, 17.5] : [10, 10];
+
+                    const clusteredIcon = L.divIcon({
+                        className: 'custom-marker-cluster',
+                        html: clusteredMarkerHTML,
+                        iconSize: iconSize,
+                        iconAnchor: iconAnchor
+                    });
+
+                    const clusteredMarker = L.marker([coords.lat, coords.lng], { icon: clusteredIcon }).addTo(map);
+
+                    // Create popup content
+                    const popupContent = partnershipCount > 1
+                        ? `<div style="text-align: center; padding: 5px;">
+                <strong style="color: #003f7f;">${partnership.country}</strong><br>
+                <span style="color: #666; font-size: 0.9em;">${partnershipCount} Partnerships</span>
+            </div>`
+                        : `<div style="text-align: center; padding: 5px;">
+                <strong style="color: #003f7f;">${partnership.name}</strong><br>
+                <span style="color: #666;">📍 ${partnership.country}</span>
+            </div>`;
+
+                    clusteredMarker.bindPopup(popupContent);
+
+                    // When clicked, zoom in and show individual markers (only if multiple partnerships)
+                    clusteredMarker.on('click', () => {
+                        if (partnershipCount === 1) {
+                            // For single partnership, just show details
+                            autoExpandCountry(partnership.country);
+                            showPartnershipDetail(countryPartnerships[0].id);
+                            return;
+                        }
+
+                        // Add individual markers for each partnership FIRST
+                        const individualMarkers = [];
+                        countryPartnerships.forEach((p, index) => {
+                            const pColor = getMarkerColor(p.type);
+
+                            const individualIcon = L.divIcon({
+                                className: 'custom-marker-individual',
+                                html: `<div style="background-color: ${pColor}; width: 20px; height: 20px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 10px rgba(0,0,0,0.3);"></div>`,
+                                iconSize: [20, 20],
+                                iconAnchor: [10, 10]
+                            });
+
+                            const individualMarker = L.marker([p.lat, p.lng], { icon: individualIcon }).addTo(map);
+                            individualMarker.bindPopup(`
+            <div style="text-align: center; padding: 5px;">
+                <strong style="color: #003f7f;">${p.name}</strong><br>
+                <span style="color: #666;">📍 ${p.country}</span>
+            </div>
+        `);
+
+                            individualMarker.on('click', () => {
+                                autoExpandCountry(p.country);
+                                showPartnershipDetail(p.id);
+                            });
+
+                            individualMarkers.push(individualMarker);
+                        });
+
+                        // THEN remove the clustered marker
+                        map.removeLayer(clusteredMarker);
+
+                        // Calculate proper bounds from all marker coordinates
+                        const lats = countryPartnerships.map(p => p.lat);
+                        const lngs = countryPartnerships.map(p => p.lng);
+
+                        const southWest = L.latLng(Math.min(...lats), Math.min(...lngs));
+                        const northEast = L.latLng(Math.max(...lats), Math.max(...lngs));
+                        const bounds = L.latLngBounds(southWest, northEast);
+
+                        // Fit bounds immediately without setTimeout
+                        map.fitBounds(bounds, {
+                            padding: [80, 80],
+                            animate: true,
+                            duration: 1,
+                            maxZoom: 4 // Prevent zooming in too close
+                        });
+
+                        // When zooming out, remove individual markers and restore clustered marker
+                        map.on('zoomend', function handleZoomOut() {
+                            if (map.getZoom() < 3) {
+                                individualMarkers.forEach(im => map.removeLayer(im));
+                                clusteredMarker.addTo(map);
+                                map.off('zoomend', handleZoomOut);
+                            }
+                        });
+
+                        // DO NOT auto-expand country or show partnership details
+                        // Let user click individual markers to see details
+                    });
+
+                    // Store all partnerships for this country with the marker
+                    markers.push({
+                        marker: clusteredMarker,
+                        partnership,
+                        coords,
+                        country: partnership.country,
+                        partnerships: countryPartnerships
+                    });
+                });
+            }
+
+            function updateMapMarkers() {
+                markers.forEach(({ marker, country }) => {
+                    // Check if any partnership from this country is in filtered results
+                    const hasVisiblePartnership = filteredPartnerships.some(p => p.country === country);
+
+                    if (hasVisiblePartnership) {
+                        if (!map.hasLayer(marker)) marker.addTo(map);
+                    } else {
+                        map.removeLayer(marker);
+                    }
+                });
+            }
+
+            function autoExpandCountry(countryName) {
+                // Find the country group
+                const countryGroups = document.querySelectorAll('.country-group');
+                countryGroups.forEach(group => {
+                    const countryHeader = group.querySelector('.country-header');
+                    const countryNameSpan = countryHeader.querySelector('.country-name');
+
+                    if (countryNameSpan && countryNameSpan.textContent === countryName) {
+                        const partnershipsList = countryHeader.nextElementSibling;
+
+                        // Close all other groups first
+                        document.querySelectorAll('.partnerships-list').forEach(list => {
+                            list.style.display = 'none';
+                        });
+
+                        // Open this country group
+                        partnershipsList.style.display = 'block';
+
+                        // Scroll the sidebar to show this country
+                        const sidebar = document.getElementById('countriesSidebar');
+                        if (sidebar) {
+                            const groupTop = group.offsetTop;
+                            sidebar.scrollTop = groupTop - 20;
+                        }
+                    }
+                });
+            }
+
+            function buildSidebar() {
+                const sidebar = document.getElementById('countriesSidebar');
+                const groupedByCountry = {};
+
+                filteredPartnerships.forEach(p => {
+                    if (!groupedByCountry[p.country]) {
+                        groupedByCountry[p.country] = {
+                            partnerships: [],
+                            countryCode: p.countryCode
+                        };
+                    }
+                    groupedByCountry[p.country].partnerships.push(p);
+                });
+
+                const sortedCountries = Object.keys(groupedByCountry).sort();
+
+                sidebar.innerHTML = sortedCountries.map(country => {
+                    const countryData = groupedByCountry[country];
+                    const partnerships = countryData.partnerships;
+                    const countryCode = countryData.countryCode;
+
+                    return `
+                        <div class="country-group">
+                            <div class="country-header" onclick="toggleCountry(this)">
+                                <span class="fi fi-${countryCode}" style="margin-right: 10px;"></span>
+                                <span class="country-name">${country}</span>
+                                <span class="country-count">${partnerships.length} Agreement${partnerships.length > 1 ? 's' : ''}</span>
+                            </div>
+                            <div class="partnerships-list" style="display: none;">
+                                ${partnerships.map(p => `
+                                    <div class="partnership-item" data-id="${p.id}" onclick="handlePartnershipClick('${p.id}')">
+                                        <div class="partnership-name">${p.name}</div>
+                                        <div class="partnership-type-badge badge-${p.type}">${formatType(p.type)}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            window.handlePartnershipClick = function (id) {
+                showPartnershipDetail(id);
+
+                // Scroll to the partnerships section
+                setTimeout(() => {
+                    const partnershipsSection = document.querySelector('.partnerships-list-section');
+                    if (partnershipsSection) {
+                        const elementPosition = partnershipsSection.offsetTop;
+                        const offsetPosition = elementPosition - 100;
+
+                        // Slower scroll by animating over time
+                        const startPosition = window.pageYOffset;
+                        const distance = offsetPosition - startPosition;
+                        const duration = 800; // milliseconds
+                        let start = null;
+
+                        function animation(currentTime) {
+                            if (start === null) start = currentTime;
+                            const timeElapsed = currentTime - start;
+                            const run = ease(timeElapsed, startPosition, distance, duration);
+                            window.scrollTo(0, run);
+                            if (timeElapsed < duration) requestAnimationFrame(animation);
+                        }
+
+                        function ease(t, b, c, d) {
+                            t /= d / 2;
+                            if (t < 1) return c / 2 * t * t + b;
+                            t--;
+                            return -c / 2 * (t * (t - 2) - 1) + b;
+                        }
+
+                        requestAnimationFrame(animation);
+                    }
+                }, 100);
+            };
+
+            // window.toggleCountry = function (header) {
+            //     const partnershipsList = header.nextElementSibling;
+            //     const isVisible = partnershipsList.style.display === 'block';
+
+            //     // Close all other open country groups
+            //     document.querySelectorAll('.partnerships-list').forEach(list => {
+            //         list.style.display = 'none';
+            //     });
+
+            //     // Toggle current country group
+            //     partnershipsList.style.display = isVisible ? 'none' : 'block';
+            // };
+
+            window.toggleCountry = function (header) {
+                const partnershipsList = header.nextElementSibling;
+                const isVisible = partnershipsList.style.display === 'block';
+
+                // Close all other open country groups
+                document.querySelectorAll('.partnerships-list').forEach(list => {
+                    list.style.display = 'none';
+                });
+
+                // Toggle current country group
+                if (!isVisible) {
+                    partnershipsList.style.display = 'block';
+
+                    // Automatically select the first partnership in the list
+                    const firstPartnershipItem = partnershipsList.querySelector('.partnership-item');
+                    if (firstPartnershipItem) {
+                        const firstPartnershipId = firstPartnershipItem.getAttribute('data-id');
+                        handlePartnershipClick(firstPartnershipId);
+                    }
+                } else {
+                    partnershipsList.style.display = 'none';
+                }
+            };
+
+            function formatType(type) {
+                const types = {
+                    'academic': 'Academic Exchange',
+                    'research': 'Research',
+                    'dual-degree': 'Dual Degree',
+                    'mou': 'MOU',
+                    'joint-research': 'Joint Research'
+                };
+                return types[type] || type;
+            }
+
+            window.showPartnershipDetail = function (id) {
+                const partnership = partnershipsData.find(p => p.id === id);
+                if (!partnership) return;
+
+                // Highlight selected item
+                document.querySelectorAll('.partnership-item').forEach(el => el.classList.remove('active'));
+                document.querySelector(`[data-id="${id}"]`)?.classList.add('active');
+
+                // Zoom to the specific partnership location (not the clustered marker)
+                if (map && partnership.lat && partnership.lng) {
+                    map.invalidateSize();
+                    map.setView([partnership.lat, partnership.lng], 8, {
+                        animate: true,
+                        duration: 1
+                    });
+
+                    // Check if this partnership's country has multiple partnerships
+                    const countryPartnerships = partnershipsData.filter(p => p.country === partnership.country);
+
+                    if (countryPartnerships.length > 1) {
+                        // Multiple partnerships - need to show individual markers first
+                        setTimeout(() => {
+                            // Find the clustered marker for this country
+                            const countryMarkerData = markers.find(m => m.country === partnership.country);
+
+                            if (countryMarkerData && map.hasLayer(countryMarkerData.marker)) {
+                                // Clustered marker is still showing, trigger it to separate
+                                countryMarkerData.marker.fire('click');
+
+                                // After separation, find and open the specific marker's popup
+                                setTimeout(() => {
+                                    // The individual markers should now be on the map
+                                    // We need to find the one at this partnership's coordinates
+                                    map.eachLayer(layer => {
+                                        if (layer instanceof L.Marker &&
+                                            layer.getLatLng().lat.toFixed(4) === partnership.lat.toFixed(4) &&
+                                            layer.getLatLng().lng.toFixed(4) === partnership.lng.toFixed(4)) {
+                                            layer.openPopup();
+                                        }
+                                    });
+                                }, 500);
+                            } else {
+                                // Individual markers already showing, just open the popup
+                                map.eachLayer(layer => {
+                                    if (layer instanceof L.Marker &&
+                                        layer.getLatLng().lat.toFixed(4) === partnership.lat.toFixed(4) &&
+                                        layer.getLatLng().lng.toFixed(4) === partnership.lng.toFixed(4)) {
+                                        layer.openPopup();
+                                    }
+                                });
+                            }
+                        }, 1000);
+                    } else {
+                        // Single partnership - just open the clustered marker popup
+                        setTimeout(() => {
+                            markers.forEach(({ marker, partnerships }) => {
+                                if (partnerships.some(p => p.id === id)) {
+                                    marker.openPopup();
+                                }
+                            });
+                        }, 1000);
+                    }
+                }
+
+                // Scroll detail container to top
+                const detailContainer = document.getElementById('partnershipDetail');
+                const contentContainer = document.querySelector('.content-container');
+                if (contentContainer) {
+                    contentContainer.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }
+
+                detailContainer.innerHTML = `
+        <div class="detail-header">
+            <span class="fi fi-${partnership.countryCode} detail-flag-icon"></span>
+            <div class="detail-title-section">
+                <h2>${partnership.name}</h2>
+                <p class="detail-country">📍 ${partnership.country}</p>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Foreign Partners</h3>
+            <div class="detail-info-row">
+                <span class="info-label">Institution</span>
+                <span class="info-value">${partnership.name}</span>
+            </div>
+            <div class="detail-info-row">
+                <span class="info-label">Country</span>
+                <span class="info-value">${partnership.country}</span>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Agreements</h3>
+            <div class="detail-info-row">
+                <span class="info-label">Agreement Name</span>
+                <span class="info-value">${partnership.name} - ${formatType(partnership.type)}</span>
+            </div>
+            <div class="detail-info-row">
+                <span class="info-label">Partner Institution</span>
+                <span class="info-value">${partnership.name}</span>
+            </div>
+            <div class="detail-info-row">
+                <span class="info-label">Agreement Type</span>
+                <span class="info-value">${partnership.agreementType}</span>
+            </div>
+            <div class="detail-info-row">
+                <span class="info-label">Start Date</span>
+                <span class="info-value">${partnership.startDate}</span>
+            </div>
+            <div class="detail-info-row">
+                <span class="info-label">Focus Areas</span>
+                <span class="info-value">${partnership.focusAreas}</span>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Sustainable Development Goals</h3>
+            <div class="sdg-list">
+                ${partnership.sdgs.map(sdg => `
+                    <div class="sdg-item">
+                        <span class="sdg-bullet">•</span>
+                        <span class="sdg-text">${sdg}</span>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Description</h3>
+            <p class="detail-description">${partnership.description}</p>
+        </div>
+
+        <div class="detail-metrics">
+            ${Object.entries(partnership.metrics).map(([key, value]) => `
+                <div class="metric-box">
+                    <div class="metric-value">${value}</div>
+                    <div class="metric-label">${formatMetricLabel(key)}</div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+            };
+
+            function formatMetricLabel(key) {
+                return key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+            }
+
+            function setupFilters() {
+                const searchInput = document.getElementById('searchInput');
+                const regionFilter = document.getElementById('regionFilter');
+                const typeFilter = document.getElementById('typeFilter');
+                const sdgFilter = document.getElementById('sdgFilter');
+                const resetButton = document.getElementById('resetFilters');
+
+                function applyFilters() {
+                    const searchTerm = searchInput.value.toLowerCase();
+                    const selectedRegion = regionFilter.value;
+                    const selectedType = typeFilter.value;
+                    const selectedSDG = sdgFilter.value;
+
+                    filteredPartnerships = partnershipsData.filter(p => {
+                        const matchesSearch = searchTerm === '' ||
+                            p.name.toLowerCase().includes(searchTerm) ||
+                            p.country.toLowerCase().includes(searchTerm) ||
+                            p.agreementType.toLowerCase().includes(searchTerm) ||
+                            p.focusAreas.toLowerCase().includes(searchTerm) ||
+                            p.description.toLowerCase().includes(searchTerm) ||
+                            p.region.toLowerCase().includes(searchTerm);
+                        const matchesRegion = selectedRegion === 'all' || p.region === selectedRegion;
+                        const matchesType = selectedType === 'all' || p.type === selectedType;
+                        const matchesSDG = selectedSDG === 'all' || p.sdgs.some(sdg => sdg.startsWith(selectedSDG));
+
+                        return matchesSearch && matchesRegion && matchesType && matchesSDG;
+                    });
+
+                    buildSidebar();
+                    updateStatistics();
+                    updateMapMarkers();
+
+                    // Clear the detail container and show empty state
+                    const detailContainer = document.getElementById('partnershipDetail');
+                    if (detailContainer) {
+                        detailContainer.innerHTML = `
+                            <div class="empty-state">
+                                <div class="empty-icon">🎓</div>
+                                <h3>Select a partnership to view details</h3>
+                                <p>Click on any institution from the list on the left to see detailed information</p>
+                            </div>
+                        `;
+                    }
+                }
+
+                searchInput.addEventListener('input', applyFilters);
+
+                // Handle Enter key press
+                searchInput.addEventListener('keypress', function (e) {
+                    if (e.key === 'Enter') {
+                        applyFilters();
+
+                        // Scroll to the partnerships section
+                        setTimeout(() => {
+                            const partnershipsSection = document.querySelector('.partnerships-list-section');
+                            if (partnershipsSection) {
+                                const elementPosition = partnershipsSection.offsetTop;
+                                const offsetPosition = elementPosition - 100;
+
+                                window.scrollTo({
+                                    top: offsetPosition,
+                                    behavior: 'smooth'
+                                });
+                            }
+                        }, 100);
+                    }
+                });
+
+                regionFilter.addEventListener('change', applyFilters);
+                typeFilter.addEventListener('change', applyFilters);
+                sdgFilter.addEventListener('change', applyFilters);
+                resetButton.addEventListener('click', () => {
+                    searchInput.value = '';
+                    regionFilter.value = 'all';
+                    typeFilter.value = 'all';
+                    sdgFilter.value = 'all';
+                    applyFilters();
+                });
+            }
+
+            function updateMapMarkers() {
+                markers.forEach(({ marker, country }) => {
+                    // Check if any partnership from this country is in filtered results
+                    const hasVisiblePartnership = filteredPartnerships.some(p => p.country === country);
+
+                    if (hasVisiblePartnership) {
+                        if (!map.hasLayer(marker)) marker.addTo(map);
+                    } else {
+                        map.removeLayer(marker);
+                    }
+                });
+            }
+
+            function updateStatistics() {
+                const countries = new Set(filteredPartnerships.map(p => p.country)).size;
+                const relations = filteredPartnerships.length;
+                const programmes = new Set(filteredPartnerships.map(p => p.type)).size;
+
+                document.getElementById('countriesCount').textContent = countries;
+                document.getElementById('relationsCount').textContent = relations;
+                document.getElementById('programmesCount').textContent = programmes;
+            }
+
+            function setupMapToggle() {
+                const toggle = document.getElementById('showMapToggle');
+                const mapSection = document.querySelector('.map-section');
+
+                toggle?.addEventListener('change', function () {
+                    if (this.checked) {
+                        mapSection.style.display = 'block';
+                        setTimeout(() => map.invalidateSize(), 100);
+                    } else {
+                        mapSection.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
