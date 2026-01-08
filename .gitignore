@@ -4,3 +4,4 @@ nul
 .env
 .DS_Store
 *.log
+data/
