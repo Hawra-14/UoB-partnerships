@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
@@ -120,102 +122,140 @@
 
         function displayLeaders() {
             const container = document.getElementById('leadersContainer');
-            
+
             if (leadersWithPartnerships.length === 0) {
                 container.innerHTML = `
-                    <div class="error-horizontal">
-                        <i class="fas fa-users"></i>
-                        <h3>No leaders found</h3>
-                    </div>
-                `;
+            <div class="error-horizontal">
+                <i class="fas fa-users"></i>
+                <h3>No leaders found</h3>
+            </div>
+        `;
                 return;
             }
 
-            let html = '<div class="leaders-horizontal-grid">';
+            // Separate primary leader from regular leaders
+            const primaryLeader = leadersWithPartnerships.find(leader =>
+                leader['Role Type'] === 'Primary' || leader['Is Primary'] === 'YES'
+            );
+            const regularLeaders = leadersWithPartnerships.filter(leader =>
+                leader['Role Type'] !== 'Primary' && leader['Is Primary'] !== 'YES'
+            );
 
-            leadersWithPartnerships.forEach(leader => {
-                const partnerships = leader.partnerships || [];
-                const uniquePartners = getUniquePartners(partnerships);
-                const focusAreas = getUniqueFocusAreas(partnerships);
-                const hasPhoto = leader.Photo && leader.Photo !== '';
-                const initials = getInitials(leader['Full Name']);
-                
-                // Get partner names for "Coordinating with" text
-                const partnerNames = uniquePartners.map(p => p.name).join(', ');
+            let html = '';
 
-                html += `
-                    <div class="leader-horizontal-card">
-                        <!-- Row 1: Photo and Name -->
-                        <div class="leader-top-row">
-                            <div class="leader-photo-horizontal">
-                                ${hasPhoto 
-                                    ? `<img src="${leader.Photo}" alt="${leader['Full Name']}" onerror="this.outerHTML='<div class=\\'photo-initials-horizontal\\'>${initials}</div>'">`
-                                    : `<div class="photo-initials-horizontal">${initials}</div>`
-                                }
-                            </div>
-                            <div class="leader-name-section">
-                                <h3 class="leader-name-horizontal">${leader['Full Name']}</h3>
-                                <p class="leader-position-horizontal">Dean of ${leader['Implementing Unit']}</p>
-                            </div>
+            // Display Primary Leader first (if exists)
+            if (primaryLeader) {
+                html += '<div class="primary-leader-section" style="padding: 3rem 3rem 5rem 3rem;">';
+                html += '<h2 class="leaders-title">Chief Partnership Leader</h2>';
+                html += createLeaderCard(primaryLeader, true);
+                html += '</div>';
+            }
+
+            // Display Regular Leaders
+            if (regularLeaders.length > 0) {
+                html += '<div class="regular-leaders-section">';
+                if (primaryLeader) {
+                    html += '<h2 class="leaders-title">College Deans</h2>';
+                }
+                html += '<div class="leaders-horizontal-grid">';
+                regularLeaders.forEach(leader => {
+                    html += createLeaderCard(leader, false);
+                });
+                html += '</div>';
+                html += '</div>';
+            }
+
+            container.innerHTML = html;
+        }
+
+        function createLeaderCard(leader, isPrimary = false) {
+            const partnerships = leader.partnerships || [];
+            const uniquePartners = getUniquePartners(partnerships);
+            const focusAreas = getUniqueFocusAreas(partnerships);
+            const hasPhoto = leader.Photo && leader.Photo !== '';
+            const initials = getInitials(leader['Full Name']);
+
+            const partnerNamesHTML = uniquePartners.map(p =>
+                `<a href="${p.website}" target="_blank" class="partner-link" title="Visit ${p.name}">${p.name}</a>`
+            ).join(', ');
+
+            const cardClass = isPrimary ? 'leader-horizontal-card primary-leader-card' : 'leader-horizontal-card';
+
+            return `
+                <div class="${cardClass}">
+                    <!-- Row 1: Photo and Name -->
+                    <div class="leader-top-row">
+                        <div class="leader-photo-horizontal ${isPrimary ? 'primary-photo' : ''}">
+                            ${hasPhoto
+                            ? `<img src="${leader.Photo}" alt="${leader['Full Name']}" onerror="this.outerHTML='<div class=\\'photo-initials-horizontal\\'>${initials}</div>'">`
+                            : `<div class="photo-initials-horizontal">${initials}</div>`
+                        }
                         </div>
-
-                        <!-- Row 2: All Other Info -->
-                        <div class="leader-bottom-row">
-                            <!-- Contact Details -->
-                            <div class="contact-details-horizontal">
-                                ${leader.Email ? `
-                                    <p><strong>Email:</strong> <a href="mailto:${leader.Email}">${leader.Email}</a></p>
-                                ` : ''}
-                                ${leader.Phone ? `
-                                    <p><strong>Telephone:</strong> <a href="tel:${leader.Phone}">${leader.Phone}</a></p>
-                                ` : ''}
-                            </div>
-
-                            ${focusAreas.length > 0 ? `
-                                <!-- Research Interests / Focus Areas -->
-                                <div class="research-interests-horizontal">
-                                    <p class="research-label"><strong>Research Interests:</strong></p>
-                                    <ul class="focus-areas-list" id="focus-list-${leader['Full Name'].replace(/\s+/g, '-')}">
-                                        ${focusAreas.slice(0, 2).map(area => `
-                                            <li class="focus-visible">${area}</li>
-                                        `).join('')}
-                                        ${focusAreas.slice(2).map(area => `
-                                            <li class="focus-hidden" style="display: none;">${area}</li>
-                                        `).join('')}
-                                    </ul>
-                                    ${focusAreas.length > 2 ? `
-                                        <button class="show-more-btn" onclick="toggleFocusAreas('${leader['Full Name'].replace(/\s+/g, '-')}')">
-                                            <span class="show-more-text">Show More</span>
-                                            <span class="show-less-text" style="display: none;">Show Less</span>
-                                            <i class="fas fa-chevron-down show-more-icon"></i>
-                                            <i class="fas fa-chevron-up show-less-icon" style="display: none;"></i>
-                                        </button>
-                                    ` : ''}
-                                </div>
-                            ` : ''}
-
-                            ${uniquePartners.length > 0 ? `
-                                <!-- Coordinating With -->
-                                <div class="coordinating-horizontal">
-                                    <p class="coordinating-label">Coordinating with: <span class="coordinating-partners">${partnerNames}</span></p>
-                                </div>
-
-                                <!-- Partner Logos -->
-                                <div class="partner-logos-horizontal">
-                                    ${uniquePartners.map(partner => `
-                                        <a href="${partner.website}" target="_blank" title="${partner.name}">
-                                            <img src="${partner.logo}" alt="${partner.name}" onerror="this.style.display='none'">
-                                        </a>
-                                    `).join('')}
-                                </div>
-                            ` : ''}
+                        <div class="leader-name-section">
+                            <h3 class="leader-name-horizontal">${leader['Full Name']}</h3>
+                            <p class="leader-position-horizontal">${isPrimary ? 'Vice President for International Partnerships' : 'Dean of ' + leader['Implementing Unit']}</p>
                         </div>
                     </div>
-                `;
-            });
 
-            html += '</div>';
-            container.innerHTML = html;
+                    <!-- Row 2: All Other Info -->
+                    <div class="leader-bottom-row">
+                        <!-- Contact Details -->
+                        <div class="contact-details-horizontal">
+                            ${leader.Email ? `
+                                <p>
+                                    <i class="fas fa-envelope"></i>
+                                    <strong>Email:</strong> <a href="mailto:${leader.Email}">${leader.Email}</a>
+                                </p>
+                            ` : ''}
+                            ${leader.Phone ? `
+                                <p>
+                                    <i class="fas fa-phone"></i>
+                                    <strong>Telephone:</strong> <a href="tel:${leader.Phone}">${leader.Phone}</a>
+                                </p>
+                            ` : ''}
+                        </div>
+
+                        ${focusAreas.length > 0 ? `
+                            <!-- Research Interests / Focus Areas -->
+                            <div class="research-interests-horizontal">
+                                <p class="research-label"><strong>Research Interests:</strong></p>
+                                <ul class="focus-areas-list" id="focus-list-${leader['Full Name'].replace(/\s+/g, '-')}">
+                                    ${focusAreas.slice(0, 2).map(area => `
+                                        <li class="focus-visible">${area}</li>
+                                    `).join('')}
+                                    ${focusAreas.slice(2).map(area => `
+                                        <li class="focus-hidden" style="display: none;">${area}</li>
+                                    `).join('')}
+                                </ul>
+                                ${focusAreas.length > 2 ? `
+                                    <button class="show-more-btn" onclick="toggleFocusAreas('${leader['Full Name'].replace(/\s+/g, '-')}')">
+                                        <span class="show-more-text">Show More</span>
+                                        <span class="show-less-text" style="display: none;">Show Less</span>
+                                        <i class="fas fa-chevron-down show-more-icon"></i>
+                                        <i class="fas fa-chevron-up show-less-icon" style="display: none;"></i>
+                                    </button>
+                                ` : ''}
+                            </div>
+                        ` : ''}
+
+                        ${uniquePartners.length > 0 ? `
+                            <!-- Coordinating With -->
+                            <div class="coordinating-horizontal">
+                                <p class="coordinating-label">Coordinating with: <span class="coordinating-partners">${partnerNamesHTML}</span></p>
+                            </div>
+
+                            <!-- Partner Logos -->
+                            <div class="partner-logos-horizontal">
+                                ${uniquePartners.map(partner => `
+                                    <a href="${partner.website}" target="_blank" title="${partner.name}">
+                                        <img src="${partner.logo}" alt="${partner.name}" onerror="this.style.display='none'">
+                                    </a>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
         }
 
         fetchLeaders();
@@ -228,13 +268,13 @@
             const showLessText = button.querySelector('.show-less-text');
             const showMoreIcon = button.querySelector('.show-more-icon');
             const showLessIcon = button.querySelector('.show-less-icon');
-            
+
             const isExpanded = hiddenItems[0].style.display !== 'none';
-            
+
             hiddenItems.forEach(item => {
                 item.style.display = isExpanded ? 'none' : 'list-item';
             });
-            
+
             showMoreText.style.display = isExpanded ? 'inline' : 'none';
             showLessText.style.display = isExpanded ? 'none' : 'inline';
             showMoreIcon.style.display = isExpanded ? 'inline' : 'none';
@@ -242,4 +282,5 @@
         }
     </script>
 </body>
+
 </html>
