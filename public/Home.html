@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>University of Bahrain - International Partnerships</title>
+    <Link href="/normalize.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
@@ -239,30 +240,33 @@
                     excellence</p>
             </div>
 
-            <div class="chart-container-wrapper">
-                <!-- Chart Title -->
-                <h3 class="chart-title">Partnership Growth Timeline</h3>
-                <p class="chart-subtitle">Annual growth from 2015 to 2024</p>
+            <div class="chart-layout-wrapper">
+                <!-- Chart Container - Left Side -->
+                <div class="chart-container-wrapper">
+                    <!-- Chart Title -->
+                    <h3 class="chart-title">Partnership Growth Timeline</h3>
+                    <p class="chart-subtitle">Annual growth from 2015 to 2024</p>
 
-                <!-- Chart Canvas -->
-                <div class="chart-canvas-wrapper">
-                    <canvas id="partnershipChart"></canvas>
+                    <!-- Chart Canvas -->
+                    <div class="chart-canvas-wrapper">
+                        <canvas id="partnershipChart"></canvas>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Quick Stats Below Chart -->
-            <div class="chart-stats-grid">
-                <div class="chart-stat-card">
-                    <div class="chart-stat-number" id="growthPercentage">156%</div>
-                    <div class="chart-stat-label">Growth Since 2015</div>
-                </div>
-                <div class="chart-stat-card">
-                    <div class="chart-stat-number" id="annualAverage">12+</div>
-                    <div class="chart-stat-label">New Partners Annually</div>
-                </div>
-                <div class="chart-stat-card">
-                    <div class="chart-stat-number" id="peakYear">2020</div>
-                    <div class="chart-stat-label">Peak Growth Year</div>
+                <!-- Quick Stats - Right Side -->
+                <div class="chart-stats-grid">
+                    <div class="chart-stat-card">
+                        <div class="chart-stat-number" id="growthPercentage">156%</div>
+                        <div class="chart-stat-label">Growth Since 2015</div>
+                    </div>
+                    <div class="chart-stat-card">
+                        <div class="chart-stat-number" id="annualAverage">12+</div>
+                        <div class="chart-stat-label">New Partners Annually</div>
+                    </div>
+                    <div class="chart-stat-card">
+                        <div class="chart-stat-number" id="peakYear">2020</div>
+                        <div class="chart-stat-label">Peak Growth Year</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -564,6 +568,7 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                devicePixelRatio: window.devicePixelRatio || 2, // Add this for better quality
                 plugins: {
                     legend: {
                         display: false
@@ -591,10 +596,10 @@
                 },
                 layout: {
                     padding: {
-                        top: 0,
-                        bottom: 70,
-                        left: 20,
-                        right: 20
+                        top: 10,
+                        bottom: 10,
+                        left: 10,
+                        right: 10
                     }
                 },
                 scales: {
@@ -606,10 +611,7 @@
                                 family: "'Inter', sans-serif"
                             },
                             color: '#666',
-                            padding: 10,
-                            callback: function (value) {
-                                return value;
-                            }
+                            padding: 10
                         },
                         grid: {
                             color: 'rgba(0, 0, 0, 0.05)',
