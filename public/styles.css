@@ -678,8 +678,8 @@ body {
 
 .featured-image {
     width: 100%;
-    height: 400px;
-    background-image: url(https://images.pexels.com/photos/8297616/pexels-photo-8297616.jpeg);
+    height: 300px;
+    /* background-image:  */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
