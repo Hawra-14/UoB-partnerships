@@ -597,7 +597,7 @@
         // Fetch data from API
         const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
             ? 'http://localhost:3001/api/partnerships'
-            : 'http://your-production-domain.com/api/partnerships';
+            : 'https://uob-partnerships.onrender.com/api/partnerships';
 
         fetch(apiUrl)
             .then(response => {
