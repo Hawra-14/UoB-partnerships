@@ -230,7 +230,7 @@ const partnershipsData = [
         agreementType: 'Dual Degree & Research Partnership',
         startDate: 'March 2021',
         renewalDate: 'March 2031',
-        focusAreas: 'Electronics, Computer Science, International Relations',
+        focusAreas: 'Electronics, Computer Science, Relations',
         description: 'Innovative dual degree program in engineering and technology fields. Students spend time at both institutions, earning recognized degrees from each. Includes research opportunities and industry connections in South Korea\'s tech sector.',
         metrics: {
             dualDegrees: '22',

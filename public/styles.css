@@ -179,7 +179,7 @@ body {
 }
 
 /* Colorful hero stats borders */
-.hero-stat-item:nth-child(1) {
+/* .hero-stat-item:nth-child(1) {
     border-left-color: var(--coral);
 }
 
@@ -193,7 +193,7 @@ body {
 
 .hero-stat-item:nth-child(4) {
     border-left-color: var(--orange);
-}
+} */
 
 .hero-stat-number {
     font-size: 2.5rem;
@@ -677,8 +677,8 @@ body {
 }
 
 .featured-image {
-    width: 100%;
-    height: 300px;
+    /* width: 80%; */
+    /* height: 300px; */
     /* background-image:  */
     background-size: cover;
     background-position: center;
@@ -689,6 +689,11 @@ body {
     justify-content: center;
     font-size: 5rem;
     color: white;
+}
+
+.featured-image img {
+    width: auto;
+    height: 300px;
 }
 
 /* List Style Professional */

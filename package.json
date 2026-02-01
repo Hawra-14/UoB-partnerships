@@ -1,7 +1,7 @@
 {
   "name": "uob-partnerships",
   "version": "1.0.0",
-  "description": "University of Bahrain International Partnerships Website and API",
+  "description": "University of Bahrain Partnerships Website and API",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
