@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - University of Bahrain Partnerships</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ==============================================
+           CLEAN & PROFESSIONAL CONTACT PAGE STYLES
+           ============================================== */
+
+        /* Main Content Layout */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 3rem;
+            margin-top: 1rem;
+            align-items: start;
+        }
+
+        /* Contact Sidebar */
+        .contact-sidebar {
+            position: sticky;
+            top: 22%;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .contact-card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #002147;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-method {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .contact-method-icon {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .contact-method-content h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+            /* margin: 0 0 0.3rem 0; */
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-method-content p {
+            font-size: 0.95rem;
+            color: #333;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .contact-method-content a {
+            color: #002147;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .contact-method-content a:hover {
+            text-decoration: underline;
+        }
+
+        /* Quick Info Box */
+        .quick-info-box {
+            /* background: linear-gradient(135deg, #003366 0%, #004d99 100%); */
+            /* background: linear-gradient(135deg, #654321 30%, #b89877 100%); */
+            /* background: linear-gradient(135deg, #c99f66 10%, #655033 100%); */
+            /* border-radius: 12px;
+            padding: 2rem;
+            color: white; */
+
+            background: #f2f4f6;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .quick-info-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: black;
+        }
+
+        .quick-info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .quick-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: rgba(0, 0, 0, 0.95);
+        }
+
+        .quick-info-item i {
+            color: black;
+            font-size: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Main Content Area */
+        .contact-main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        /* Section Card */
+        .section-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+        }
+
+        .section-card-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .section-card-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #002147;
+            margin-bottom: 0.8rem;
+        }
+
+        .section-card-description {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Partnership Types Grid */
+        .partnership-types-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+        }
+
+        .partnership-type-card {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .partnership-type-header {
+            margin-bottom: 0.8rem;
+        }
+
+        .partnership-badge {
+            background: #002147;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .partnership-type-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #002147;
+            margin: 0;
+        }
+
+        .partnership-type-card p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .process-step-card {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            padding: 1.5rem;
+            background: #f2f4f6;
+            border-radius: 8px;
+            /* border-left: 3px solid #002147; */
+        }
+
+        .process-step-number {
+            width: 45px;
+            height: 45px;
+            min-width: 45px;
+            background: #002147;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .process-step-content h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #002147;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .process-step-content p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Email Template Box */
+        .email-template-box {
+            background: #002147;
+            /* background: linear-gradient(135deg, #7d5730 0%, #311d08 100%); */
+            /* background: linear-gradient(135deg, #655033 30%, #3c301f 100%); */
+            border-radius: 12px;
+            padding: 2.5rem;
+            color: white;
+            margin-top: 1.5rem;
+        }
+
+        .email-template-header {
+            margin-bottom: 2rem;
+        }
+
+        .email-template-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.8rem;
+        }
+
+        .email-template-subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .email-checklist {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .email-checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .email-checklist-item i {
+            color: var(--sage-green);
+            font-size: 0.9rem;
+        }
+
+        .email-cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            background: white;
+            color: #002147;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .email-cta-button:hover {
+            background: #f8fafc;
+        }
+
+        /* Simple Content Sections */
+        .content-section {
+            margin-bottom: 3rem;
+        }
+
+        .content-section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #002147;
+            margin-bottom: 1rem;
+        }
+
+        .content-section-description {
+            font-size: 1.05rem;
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        /* Departments Grid */
+        .departments-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .department-card-modern {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+        }
+
+        .department-icon-modern {
+            width: 50px;
+            height: 50px;
+            background: #f8fafc;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #002147;
+            margin-bottom: 1.2rem;
+        }
+
+        .department-card-modern h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #002147;
+            margin-bottom: 0.8rem;
+        }
+
+        .department-card-modern p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+        }
+
+        .department-contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .department-contacts a {
+            color: #002147;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .department-contacts a:hover {
+            text-decoration: underline;
+        }
+
+        .department-contacts i {
+            font-size: 0.75rem;
+        }
+
+        /* Process Timeline */
+        .process-timeline {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .process-step {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+        }
+
+        .process-number {
+            width: 50px;
+            height: 50px;
+            background: #002147;
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+        }
+
+        .process-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #002147;
+            margin-bottom: 0.8rem;
+        }
+
+        .process-description {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* CTA Section with Dots Background */
+        .cta-section {
+            background: #002147;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.4) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.5;
+        }
+
+        .cta-content {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Left Side: Logo + Title Together -->
+            <div class="nav-left">
+                <div class="logo-space" title="Logo">
+                    <img src="../images/UOB-new-logo.png" alt="University of Bahrain" />
+                </div>
+                <div class="nav-title">
+                    <h2>University of Bahrain</h2>
+                    <p class="nav-subtitle">Vice President for Partnerships and Development</p>
+                </div>
+            </div>
+
+            <!-- Right Side: Navigation Links -->
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="Home.html" class="nav-link">HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a href="partners.html" class="nav-link">PARTNERSHIP</a>
+                </li>
+                <li class="nav-item">
+                    <a href="Contact.html" class="nav-link active">CONTACT</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header (Same style as partners page) -->
+    <!-- <section class="page-header">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>Connect with the University of Bahrain to explore partnership opportunities and collaboration</p>
+        </div>
+    </section> -->
+
+    <!-- Main Contact Layout -->
+    <section class="section-pro" style="background: #f8fafc;">
+        <div class="container">
+            <div class="contact-layout">
+                <!-- Sidebar -->
+                <div class="contact-sidebar">
+                    <!-- Contact Information Card -->
+                    <div class="contact-card">
+                        <h2 class="contact-card-title">Contact Information</h2>
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="contact-method-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-method-content">
+                                    <h4>Email</h4>
+                                    <a href="mailto:vppdfollowup@uob.edu.bh">vppdfollowup@uob.edu.bh</a>
+                                    <a href="mailto:ewali@uob.edu.bh">ewali@uob.edu.bh</a>
+                                    <p style="margin-top: 0.3rem;">We respond within 24-48 hours</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-method">
+                                <div class="contact-method-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="contact-method-content">
+                                    <h4>Phone</h4>
+                                    <a href="tel:+97317437775">+973 1743 7775</a>
+                                    <p style="margin-top: 0.3rem;">Available during office hours</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-method">
+                                <div class="contact-method-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-method-content">
+                                    <h4>Location</h4>
+                                    <p>
+                                        P.O. Box 32038<br>
+                                        Sakhir – Kingdom of Bahrain<br>
+                                        1017 Road 5418<br>
+                                        Zallaq 1054
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Info Box -->
+                    <div class="quick-info-box">
+                        <h3 class="quick-info-title">Office Hours</h3>
+                        <div class="quick-info-list">
+                            <div class="quick-info-item">
+                                <i class="fas fa-circle"></i>
+                                Sunday - Thursday: 8:00 AM - 3:30 PM
+                            </div>
+                            <div class="quick-info-item">
+                                <i class="fas fa-circle"></i>
+                                Friday - Saturday: Closed
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="contact-main-content">
+                    <!-- About Partnerships -->
+                    <div class="section-card">
+                        <div class="section-card-header">
+                            <h2 class="section-card-title">Partnership Agreements</h2>
+                            <p class="section-card-description">
+                                The University of Bahrain actively fosters strategic partnerships with leading
+                                institutions worldwide. Our agreements facilitate academic collaboration, research
+                                excellence, student mobility, and knowledge exchange that benefit both parties and
+                                contribute to global educational advancement.
+                            </p>
+                        </div>
+
+                        <div class="partnership-types-grid">
+                            <div class="partnership-type-card">
+                                <div class="partnership-type-header">
+                                    <div class="partnership-badge">MOU</div>
+                                    <h4>Memorandum of Understanding</h4>
+                                </div>
+                                <p>Framework agreements establishing mutual interest and general terms for
+                                    collaboration between institutions</p>
+                            </div>
+
+                            <div class="partnership-type-card">
+                                <div class="partnership-type-header">
+                                    <div class="partnership-badge">MOA</div>
+                                    <h4>Memorandum of Agreement</h4>
+                                </div>
+                                <p>Detailed agreements with specific obligations, activities, and measurable outcomes
+                                </p>
+                            </div>
+
+                            <div class="partnership-type-card">
+                                <div class="partnership-type-header">
+                                    <div class="partnership-badge">SEA</div>
+                                    <h4>Student Exchange Agreement</h4>
+                                </div>
+                                <p>Facilitating student mobility programs and academic exchanges between partner
+                                    institutions</p>
+                            </div>
+
+                            <div class="partnership-type-card">
+                                <div class="partnership-type-header">
+                                    <div class="partnership-badge">JRP</div>
+                                    <h4>Joint Research Program</h4>
+                                </div>
+                                <p>Collaborative research initiatives, shared resources, and joint academic endeavors
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- How to Partner -->
+                    <div class="section-card">
+                        <div class="section-card-header">
+                            <h2 class="section-card-title">Partnership Development Process</h2>
+                            <p class="section-card-description">
+                                Our structured approach ensures successful partnerships aligned with institutional
+                                goals and values
+                            </p>
+                        </div>
+
+                        <div class="process-steps">
+                            <div class="process-step-card">
+                                <div class="process-step-number">01</div>
+                                <div class="process-step-content">
+                                    <h4>Initial Inquiry</h4>
+                                    <p>Submit your partnership proposal via email with institutional background and
+                                        collaboration objectives</p>
+                                </div>
+                            </div>
+
+                            <div class="process-step-card">
+                                <div class="process-step-number">02</div>
+                                <div class="process-step-content">
+                                    <h4>Preliminary Review</h4>
+                                    <p>Our team evaluates the proposal for strategic alignment and partnership
+                                        potential</p>
+                                </div>
+                            </div>
+
+                            <div class="process-step-card">
+                                <div class="process-step-number">03</div>
+                                <div class="process-step-content">
+                                    <h4>Consultation Meeting</h4>
+                                    <p>Discussion of mutual goals, collaboration areas, and expected outcomes with
+                                        relevant stakeholders</p>
+                                </div>
+                            </div>
+
+                            <div class="process-step-card">
+                                <div class="process-step-number">04</div>
+                                <div class="process-step-content">
+                                    <h4>Agreement Development</h4>
+                                    <p>Collaborative drafting of partnership terms, responsibilities, and deliverables
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="process-step-card">
+                                <div class="process-step-number">05</div>
+                                <div class="process-step-content">
+                                    <h4>Formal Signing</h4>
+                                    <p>Official agreement signing and partnership launch with defined implementation
+                                        timeline</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Email Template -->
+                    <div class="email-template-box">
+                        <div class="email-template-header">
+                            <h3 class="email-template-title">Ready to Partner With Us?</h3>
+                            <p class="email-template-subtitle">Send us a comprehensive partnership inquiry including
+                                the following information:</p>
+                        </div>
+
+                        <div class="email-checklist">
+                            <div class="email-checklist-item">
+                                <i class="fas fa-check-circle"></i>
+                                Institution name and background
+                            </div>
+                            <div class="email-checklist-item">
+                                <i class="fas fa-check-circle"></i>
+                                Proposed collaboration areas
+                            </div>
+                            <div class="email-checklist-item">
+                                <i class="fas fa-check-circle"></i>
+                                Expected outcomes and benefits
+                            </div>
+                            <div class="email-checklist-item">
+                                <i class="fas fa-check-circle"></i>
+                                Preferred agreement type
+                            </div>
+                            <div class="email-checklist-item">
+                                <i class="fas fa-check-circle"></i>
+                                Contact person details
+                            </div>
+                            <div class="email-checklist-item">
+                                <i class="fas fa-check-circle"></i>
+                                Timeline and priority level
+                            </div>
+                        </div>
+
+                        <a href="mailto:vppdfollowup@uob.edu.bh?subject=Partnership Inquiry - [Your Institution Name]"
+                            class="email-cta-button">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Partnership Inquiry
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deans of Colleges -->
+    <section class="section-pro" style="background: white; padding: 4rem 0;">
+        <div class="container">
+            <div class="content-section">
+                <h2 class="content-section-title">Connect with Our College Deans</h2>
+                <p class="content-section-description">Reach out to our college leadership for academic partnerships and
+                    collaboration opportunities</p>
+            </div>
+
+            <div class="departments-grid">
+                <div class="department-card-modern">
+                    <div class="department-icon-modern">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>College of Science</h3>
+                    <p>Leading programs in natural sciences, mathematics, and scientific research</p>
+                    <div class="department-contacts">
+                        <a href="mailto:science@uob.edu.bh">
+                            <i class="fas fa-envelope"></i>
+                            science@uob.edu.bh
+                        </a>
+                        <a href="tel:+97317437001">
+                            <i class="fas fa-phone"></i>
+                            +973 1743 7001
+                        </a>
+                    </div>
+                </div>
+
+                <div class="department-card-modern">
+                    <div class="department-icon-modern">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>College of Arts</h3>
+                    <p>Excellence in humanities, languages, and social sciences education</p>
+                    <div class="department-contacts">
+                        <a href="mailto:arts@uob.edu.bh">
+                            <i class="fas fa-envelope"></i>
+                            arts@uob.edu.bh
+                        </a>
+                        <a href="tel:+97317437002">
+                            <i class="fas fa-phone"></i>
+                            +973 1743 7002
+                        </a>
+                    </div>
+                </div>
+
+                <div class="department-card-modern">
+                    <div class="department-icon-modern">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>College of Business Administration</h3>
+                    <p>Innovative business education and industry-aligned programs</p>
+                    <div class="department-contacts">
+                        <a href="mailto:business@uob.edu.bh">
+                            <i class="fas fa-envelope"></i>
+                            business@uob.edu.bh
+                        </a>
+                        <a href="tel:+97317437003">
+                            <i class="fas fa-phone"></i>
+                            +973 1743 7003
+                        </a>
+                    </div>
+                </div>
+
+                <div class="department-card-modern">
+                    <div class="department-icon-modern">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>College of Information Technology</h3>
+                    <p>Advanced programs in computing, software engineering, and IT</p>
+                    <div class="department-contacts">
+                        <a href="mailto:it@uob.edu.bh">
+                            <i class="fas fa-envelope"></i>
+                            it@uob.edu.bh
+                        </a>
+                        <a href="tel:+97317437004">
+                            <i class="fas fa-phone"></i>
+                            +973 1743 7004
+                        </a>
+                    </div>
+                </div>
+
+                <div class="department-card-modern">
+                    <div class="department-icon-modern">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>College of Engineering</h3>
+                    <p>Cutting-edge engineering programs and technological innovation</p>
+                    <div class="department-contacts">
+                        <a href="mailto:engineering@uob.edu.bh">
+                            <i class="fas fa-envelope"></i>
+                            engineering@uob.edu.bh
+                        </a>
+                        <a href="tel:+97317437005">
+                            <i class="fas fa-phone"></i>
+                            +973 1743 7005
+                        </a>
+                    </div>
+                </div>
+
+                <div class="department-card-modern">
+                    <div class="department-icon-modern">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>College of Law</h3>
+                    <p>Comprehensive legal education and jurisprudence studies</p>
+                    <div class="department-contacts">
+                        <a href="mailto:law@uob.edu.bh">
+                            <i class="fas fa-envelope"></i>
+                            law@uob.edu.bh
+                        </a>
+                        <a href="tel:+97317437006">
+                            <i class="fas fa-phone"></i>
+                            +973 1743 7006
+                        </a>
+                    </div>
+                </div>
+
+                <div class="department-card-modern">
+                    <div class="department-icon-modern">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>College of Health Sciences</h3>
+                    <p>Healthcare education and medical sciences programs</p>
+                    <div class="department-contacts">
+                        <a href="mailto:health@uob.edu.bh">
+                            <i class="fas fa-envelope"></i>
+                            health@uob.edu.bh
+                        </a>
+                        <a href="tel:+97317437007">
+                            <i class="fas fa-phone"></i>
+                            +973 1743 7007
+                        </a>
+                    </div>
+                </div>
+
+                <div class="department-card-modern">
+                    <div class="department-icon-modern">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>College of Education</h3>
+                    <p>Teacher training and educational leadership development</p>
+                    <div class="department-contacts">
+                        <a href="mailto:education@uob.edu.bh">
+                            <i class="fas fa-envelope"></i>
+                            education@uob.edu.bh
+                        </a>
+                        <a href="tel:+97317437008">
+                            <i class="fas fa-phone"></i>
+                            +973 1743 7008
+                        </a>
+                    </div>
+                </div>
+
+                <div class="department-card-modern">
+                    <div class="department-icon-modern">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <h3>College of Physical Education & Physiotherapy</h3>
+                    <p>Sports science, physical education, and rehabilitation programs</p>
+                    <div class="department-contacts">
+                        <a href="mailto:physed@uob.edu.bh">
+                            <i class="fas fa-envelope"></i>
+                            physed@uob.edu.bh
+                        </a>
+                        <a href="tel:+97317437009">
+                            <i class="fas fa-phone"></i>
+                            +973 1743 7009
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action with Dots Background -->
+    <section class="section-pro cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Build a Partnership?</h2>
+                <p class="cta-description">
+                    We welcome partnership inquiries from institutions, organizations, and stakeholders committed to
+                    academic excellence and innovation. Contact our team to explore collaboration opportunities.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:vppdfollowup@uob.edu.bh" class="btn-pro-primary">
+                        <i class="fas fa-envelope"></i> Email Us
+                    </a>
+                    <a href="partners.html" class="btn-pro-secondary">
+                        <i class="fas fa-handshake"></i> View Current Partners
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="margin-top: 30px;">
+        <div class="container">
+            <p>&copy; 2025 University of Bahrain. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

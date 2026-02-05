@@ -21,6 +21,7 @@
     --orange: #FF8C42;
     --sky-blue: #3498DB;
     --sage-green: #84A98C;
+    /* #729279e6 Green */
     --beige: #bfa386;
     --light-beige: #D9C7B8;
     --dark-beige: #9e846f;
@@ -72,25 +73,87 @@ body {
 }
 
 .nav-container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 70px;
+    min-height: 100px;
 }
 
-.nav-logo h2 {
-    color: white;
-    font-size: 1.3rem;
+/* Left Side: Logo + Title Together */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+/* Logo Styling - ORIGINAL STYLE (Fixed on large screens) */
+.logo-space {
+    position: fixed;
+    top: -29px;
+    left: 5%;
+    width: 100px;
+    height: 150px;
+    background: #fff;
+    border-radius: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    z-index: 1001;
+    transition: transform 0.3s ease-in-out;
+}
+
+.logo-space.hide-on-scroll {
+    transform: translateY(-100%);
+}
+
+.logo-space img {
+    position: absolute;
+    bottom: 20px;
+    max-width: 75%;
+    max-height: 75%;
+    border-radius: 15px;
+}
+
+/* Title - Positioned right next to logo */
+.nav-title {
+    margin-left: 120px;
+    /* Space for fixed logo (100px width + 20px gap) */
+}
+
+.nav-title h2 {
+    color: #ffffff;
+    font-size: 1.5rem;
     font-weight: 600;
+    margin: 0;
+    white-space: nowrap;
 }
 
+/* Subtitle Styling */
+.nav-subtitle {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+    font-weight: 400;
+    margin: 0;
+    white-space: nowrap;
+    line-height: 1.2;
+}
+
+/* Navigation Menu - Right Side */
 .nav-menu {
     display: flex;
     list-style: none;
     gap: 2rem;
+    margin: 0;
+    align-self: end;
+    padding: 1.7%;
+}
+
+.nav-item {
+    margin: 0;
 }
 
 .nav-link {
@@ -98,29 +161,19 @@ body {
     text-decoration: none;
     font-weight: 500;
     transition: all 0.3s ease;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1rem 0;
+    display: block;
+}
+
+.nav-link:hover {
+    opacity: 0.8;
 }
 
 .nav-link.active {
     border-bottom: 2px solid #fff;
 }
 
-/* Hamburger Menu */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 4px;
-}
-
-.bar {
-    width: 25px;
-    height: 3px;
-    background-color: white;
-    transition: all 0.3s ease;
-}
-
-/* Professional Hero */
+/* Hero Section */
 .hero-section {
     background: url('https://uobhomesiteprod.s3.me-south-1.amazonaws.com/site-prod/uploads/2020/12/Banner-uob-sdg.jpg');
     background-size: cover;
@@ -249,7 +302,7 @@ body {
 
 /* Section Headers Professional */
 .section-pro {
-    padding: 100px 20px 50px;
+    padding: 50px 20px 50px;
 }
 
 .section-header-pro {
@@ -301,7 +354,7 @@ body {
 
 .card-pro:hover {
     /* border-color: var(--secondary-color); */
-    border: 2.5px solid var(--dark-beige);
+    border: 2.5px solid var(--beige);
     box-shadow: 0 10px 40px rgba(126, 119, 47, 0.15);
     transform: translateY(-4px);
 }
@@ -311,7 +364,7 @@ body {
     height: 60px;
     background: var(--gradient-beige);
     border-radius: 30px;
-    border: 2px solid var(--dark-beige);
+    /* border: 2px solid var(--dark-beige); */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -444,11 +497,11 @@ body {
 /* Vision Card */
 .vision-card {
     text-align: center;
-    background: linear-gradient(135deg, rgba(158, 132, 111, 0.4) 25%, rgba(0, 77, 153, 0.5) 99%),
+    background: linear-gradient(135deg, rgba(158, 132, 111, 0.2) 25%, rgba(0, 77, 153, 0.5) 99%),
         url('https://law.uob.edu.bh/wp-content/uploads/sites/3/2021/03/P1001013@2x.png') center/cover no-repeat;
     color: white;
     position: sticky;
-    top: 18vh;
+    top: 20vh;
     height: fit-content;
     border-radius: 10px;
     padding: 3rem;
@@ -879,12 +932,12 @@ body {
 }
 
 .tab-button-pro:hover {
-    color: var(--beige);
+    color: #b3061a;
 }
 
 .tab-button-pro.active {
-    color: var(--dark-beige);
-    border-bottom-color: var(--dark-beige);
+    color: #b3061a;
+    border-bottom-color: #b3061a;
 }
 
 .tab-panel-pro {
@@ -898,15 +951,15 @@ body {
 
 .fa-solid,
 .fas {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: var(--secondary-color);
+    font-size: 1.5rem;
+    /* margin-bottom: 1rem; */
+    color: #b3061a;
 }
 
 /* Accordion Professional */
 .accordion-pro {
     max-width: 900px;
-    margin: 0 auto;
+    margin: 50px auto;
 }
 
 .accordion-item-pro {
@@ -945,7 +998,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--primary-color);
+    color: #b3061a;
     transition: all 0.3s ease;
 }
 
@@ -1109,28 +1162,6 @@ body {
 .stat-item p {
     font-size: 1.1rem;
     opacity: 0.9;
-}
-
-/* CTA Section */
-.cta-section {
-    padding: 80px 20px;
-    text-align: center;
-    background-color: var(--light-gray);
-}
-
-.cta-section h2 {
-    font-size: 2.5rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.cta-section p {
-    font-size: 1.2rem;
-    color: var(--text-light);
-    margin-bottom: 2rem;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 /* Page Header */
@@ -1511,7 +1542,7 @@ body {
     background-color: var(--primary-color);
     color: white;
     text-align: center;
-    padding: 30px 20px;
+    padding: 20px;
     margin-top: 60px;
 }
 
@@ -1579,7 +1610,7 @@ body {
 
 /* Map Section */
 .map-section {
-    padding: 40px 20px;
+    padding: 50px 20px;
     background-color: white;
 }
 
