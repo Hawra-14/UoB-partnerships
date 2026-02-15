@@ -11,6 +11,86 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <style>
+        .chart-filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            background: white;
+            padding: 0.4rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-filter-btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            background: transparent;
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .chart-filter-btn:hover {
+            background: #f0f0f0;
+            color: #003366;
+        }
+
+        .chart-filter-btn.active {
+            background: #003366;
+            color: white;
+        }
+
+        .chart-filter-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.8s, height 0.8s;
+        }
+
+        .chart-filter-btn:active::after {
+            width: 200px;
+            height: 200px;
+        }
+
+        /* Chart animation */
+        .chart-canvas-wrapper {
+            width: 100%;
+            height: 400px;
+            position: relative;
+        }
+
+        .chart-canvas-wrapper canvas {
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .chart-canvas-wrapper canvas.chart-updating {
+            opacity: 0.4;
+            transform: scale(0.98);
+        }
+
+        /* Stats number animation */
+        .chart-stat-number {
+            transition: all 0.5s ease;
+        }
+
+        .chart-stat-number.updating {
+            transform: scale(0.9);
+            opacity: 0.5;
+        }
+    </style>
 </head>
 
 <body>
@@ -43,14 +123,14 @@
         </div>
     </nav>
 
-    <!-- Hero Section - Professional -->
+    <!-- Hero Section -->
     <section class="hero-section">
         <div class="container">
             <h1>Building Tomorrow's<br>Leaders Together</h1>
             <p class="hero-subtitle">Empowering excellence through strategic collaboration, fostering
                 innovation, and advancing knowledge across borders</p>
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <a href="partners.html" class="btn-pro-primary">Explore Partners</a>
+                <a href="partners.html" class="btn-primary">Explore Partners</a>
                 <a href="Contact.html" class="btn-pro-secondary">Partner With Us</a>
             </div>
 
@@ -76,7 +156,7 @@
     </section>
 
     <!-- What Are Partnerships -->
-    <section class="section-pro" style="background: white;">
+    <section class="main-section" style="background: white;">
         <div class="container">
             <div class="section-header-pro">
                 <h2 class="section-title-pro">What Are Partnerships?</h2>
@@ -109,7 +189,7 @@
     </section>
 
     <!-- Vision & Goals -->
-    <section class="section-pro vision-section">
+    <section class="main-section vision-section">
         <div class="container">
             <div class="section-header-pro">
                 <div class="section-eyebrow">Our Vision</div>
@@ -117,51 +197,51 @@
             </div>
 
             <div class="vision-goals-grid">
-                <!-- Vision Card - Left Side (Sticky & Shorter) -->
+                <!-- Vision Card - Left Side -->
                 <div class="vision-card">
                     <h3 class="vision-title">Our Vision</h3>
                     <p class="vision-text">
                         A Bahraini higher education institution, leading in education, building a knowledge society,
                         fostering entrepreneurship, and enhancing sustainability, that aims to be one of the best
                         academic
-                        institutions in the region, contributing to the Kingdom of Bahrain’s Economic Vision 2030.
+                        institutions in the region, contributing to the Kingdom of Bahrain's Economic Vision 2030.
                     </p>
                 </div>
 
-                <!-- Goals List - Right Side (Stacked Vertically) -->
+                <!-- Goals List - Right Side -->
                 <div class="goals-list">
-                    <div class="card-pro">
+                    <div class="goal-card">
                         <div class="card-icon-pro">01</div>
                         <h3 class="card-title-pro">Global Excellence</h3>
                         <p class="card-text-pro">Enhance academic quality through collaboration with world-class
                             institutions</p>
                     </div>
 
-                    <div class="card-pro">
+                    <div class="goal-card">
                         <div class="card-icon-pro">02</div>
                         <h3 class="card-title-pro">Research Innovation</h3>
                         <p class="card-text-pro">Advance cutting-edge research through collaboration</p>
                     </div>
 
-                    <div class="card-pro">
+                    <div class="goal-card">
                         <div class="card-icon-pro">03</div>
                         <h3 class="card-title-pro">Student Mobility</h3>
                         <p class="card-text-pro">Provide students with global learning experiences</p>
                     </div>
 
-                    <div class="card-pro">
+                    <div class="goal-card">
                         <div class="card-icon-pro">04</div>
                         <h3 class="card-title-pro">Faculty Development</h3>
                         <p class="card-text-pro">Support faculty growth through exchange</p>
                     </div>
 
-                    <div class="card-pro">
+                    <div class="goal-card">
                         <div class="card-icon-pro">05</div>
                         <h3 class="card-title-pro">Sustainable Impact</h3>
                         <p class="card-text-pro">Contribute to UN Sustainable Development Goals</p>
                     </div>
 
-                    <div class="card-pro">
+                    <div class="goal-card">
                         <div class="card-icon-pro">06</div>
                         <h3 class="card-title-pro">Knowledge Exchange</h3>
                         <p class="card-text-pro">Foster cross-cultural understanding and learning</p>
@@ -172,7 +252,7 @@
     </section>
 
     <!-- Types of Partnerships -->
-    <section class="section-pro partnership-types-section">
+    <section class="main-section partnership-types-section">
         <div class="container">
             <div class="section-header-pro">
                 <div class="section-eyebrow">Partnership Models</div>
@@ -236,21 +316,32 @@
     </section>
 
     <!-- Partnership Growth Chart Section -->
-    <section class="section-pro chart-section" style="background: #f8f9fa;">
+    <section class="main-section chart-section" style="background: #f8f9fa;">
         <div class="container">
             <div class="section-header-pro">
                 <div class="section-eyebrow">Our Growth Story</div>
                 <h2 class="section-title-pro">Partnership Growth Over the Years</h2>
-                <p class="section-description-pro">Tracking our journey of collaboration and academic
-                    excellence</p>
+                <p class="section-description-pro">Tracking our journey of collaboration and academic excellence</p>
             </div>
 
             <div class="chart-layout-wrapper">
                 <!-- Chart Container - Left Side -->
                 <div class="chart-container-wrapper">
-                    <!-- Chart Title -->
-                    <h3 class="chart-title">Partnership Growth Timeline</h3>
-                    <p class="chart-subtitle">Annual growth from 2015 to 2025</p>
+                    <!-- Chart Title and Filters -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                        <div>
+                            <h3 class="chart-title" style="margin-bottom: 0.3rem;">Partnership Growth Timeline</h3>
+                            <p class="chart-subtitle" id="chart-range-label">Annual growth from 2000 to 2026</p>
+                        </div>
+
+                        <!-- Filter Buttons -->
+                        <div class="chart-filter-buttons">
+                            <button class="chart-filter-btn" data-range="5" title="Last 5 years">5Y</button>
+                            <button class="chart-filter-btn" data-range="10" title="Last 10 years">10Y</button>
+                            <button class="chart-filter-btn" data-range="15" title="Last 15 years">15Y</button>
+                            <button class="chart-filter-btn active" data-range="all" title="All years">All</button>
+                        </div>
+                    </div>
 
                     <!-- Chart Canvas -->
                     <div class="chart-canvas-wrapper">
@@ -261,15 +352,15 @@
                 <!-- Quick Stats - Right Side -->
                 <div class="chart-stats-grid">
                     <div class="chart-stat-card">
-                        <div class="chart-stat-number" id="growthPercentage">156%</div>
-                        <div class="chart-stat-label">Growth Since 2015</div>
+                        <div class="chart-stat-number" id="growthPercentage">0%</div>
+                        <div class="chart-stat-label">Growth in Range</div>
                     </div>
                     <div class="chart-stat-card">
-                        <div class="chart-stat-number" id="annualAverage">12+</div>
-                        <div class="chart-stat-label">New Partners Annually</div>
+                        <div class="chart-stat-number" id="annualAverage">0</div>
+                        <div class="chart-stat-label">Avg. Annually</div>
                     </div>
                     <div class="chart-stat-card">
-                        <div class="chart-stat-number" id="peakYear">2020</div>
+                        <div class="chart-stat-number" id="peakYear">-</div>
                         <div class="chart-stat-label">Peak Growth Year</div>
                     </div>
                 </div>
@@ -278,7 +369,7 @@
     </section>
 
     <!-- Benefits - Tab System -->
-    <section class="section-pro" style="background: #f8f9fa;">
+    <section class="main-section" style="background: #f8f9fa;">
         <div class="container">
             <div class="section-header-pro">
                 <div class="section-eyebrow">Value Proposition</div>
@@ -297,27 +388,27 @@
 
                 <div class="tab-panel-pro active" id="students-pro">
                     <div class="grid-pro-4">
-                        <div class="card-pro">
+                        <div class="goal-card">
                             <i class="fas fa-globe"></i>
                             <h4 style="font-size: 1.2rem; font-weight: 700; color: #001a33; margin-bottom: 0.8rem;">
                                 Global Exposure</h4>
                             <p class="card-text-pro">Study abroad opportunities and learning experiences
                             </p>
                         </div>
-                        <div class="card-pro">
+                        <div class="goal-card">
                             <i class="fas fa-certificate"></i>
                             <h4 style="font-size: 1.2rem; font-weight: 700; color: #001a33; margin-bottom: 0.8rem;">
                                 Enhanced Credentials</h4>
                             <p class="card-text-pro">Access to dual degrees and internationally recognized
                                 qualifications</p>
                         </div>
-                        <div class="card-pro">
+                        <div class="goal-card">
                             <i class="fas fa-users"></i>
                             <h4 style="font-size: 1.2rem; font-weight: 700; color: #001a33; margin-bottom: 0.8rem;">
                                 Cultural Exchange</h4>
                             <p class="card-text-pro">Build international networks and cross-cultural competencies</p>
                         </div>
-                        <div class="card-pro">
+                        <div class="goal-card">
                             <i class="fas fa-briefcase"></i>
                             <h4 style="font-size: 1.2rem; font-weight: 700; color: #001a33; margin-bottom: 0.8rem;">
                                 Career Opportunities</h4>
@@ -328,25 +419,25 @@
 
                 <div class="tab-panel-pro" id="faculty-pro">
                     <div class="grid-pro-4">
-                        <div class="card-pro">
+                        <div class="goal-card">
                             <i class="fas fa-search"></i>
                             <h4 style="font-size: 1.2rem; font-weight: 700; color: #001a33; margin-bottom: 0.8rem;">
                                 Research Collaboration</h4>
                             <p class="card-text-pro">Access to international research networks and publications</p>
                         </div>
-                        <div class="card-pro">
+                        <div class="goal-card">
                             <i class="fas fa-chalkboard-teacher"></i>
                             <h4 style="font-size: 1.2rem; font-weight: 700; color: #001a33; margin-bottom: 0.8rem;">
                                 Professional Development</h4>
                             <p class="card-text-pro">Teaching exchanges and pedagogical approaches</p>
                         </div>
-                        <div class="card-pro">
+                        <div class="goal-card">
                             <i class="fas fa-flask"></i>
                             <h4 style="font-size: 1.2rem; font-weight: 700; color: #001a33; margin-bottom: 0.8rem;">
                                 Resource Sharing</h4>
                             <p class="card-text-pro">Access to specialized equipment and facilities</p>
                         </div>
-                        <div class="card-pro">
+                        <div class="goal-card">
                             <i class="fas fa-award"></i>
                             <h4 style="font-size: 1.2rem; font-weight: 700; color: #001a33; margin-bottom: 0.8rem;">
                                 Academic Recognition</h4>
@@ -357,25 +448,25 @@
 
                 <div class="tab-panel-pro" id="university-pro">
                     <div class="grid-pro-4">
-                        <div class="card-pro">
+                        <div class="goal-card">
                             <i class="fas fa-trophy"></i>
                             <h4 style="font-size: 1.2rem; font-weight: 700; color: #001a33; margin-bottom: 0.8rem;">
                                 Global Rankings</h4>
                             <p class="card-text-pro">Improved international standing and recognition</p>
                         </div>
-                        <div class="card-pro">
+                        <div class="goal-card">
                             <i class="fas fa-book-open"></i>
                             <h4 style="font-size: 1.2rem; font-weight: 700; color: #001a33; margin-bottom: 0.8rem;">
                                 Academic Quality</h4>
                             <p class="card-text-pro">Enhanced curriculum through best practices</p>
                         </div>
-                        <div class="card-pro">
+                        <div class="goal-card">
                             <i class="fas fa-handshake"></i>
                             <h4 style="font-size: 1.2rem; font-weight: 700; color: #001a33; margin-bottom: 0.8rem;">
                                 Strategic Alliances</h4>
                             <p class="card-text-pro">Strong relationships with global institutions</p>
                         </div>
-                        <div class="card-pro">
+                        <div class="goal-card">
                             <i class="fas fa-chart-line"></i>
                             <h4 style="font-size: 1.2rem; font-weight: 700; color: #001a33; margin-bottom: 0.8rem;">
                                 Institutional Growth</h4>
@@ -386,25 +477,25 @@
 
                 <div class="tab-panel-pro" id="industry-pro">
                     <div class="grid-pro-4">
-                        <div class="card-pro">
+                        <div class="goal-card">
                             <i class="fas fa-user-graduate"></i>
                             <h4 style="font-size: 1.2rem; font-weight: 700; color: #001a33; margin-bottom: 0.8rem;">
                                 Talent Pipeline</h4>
                             <p class="card-text-pro">Access to skilled graduates and talent</p>
                         </div>
-                        <div class="card-pro">
+                        <div class="goal-card">
                             <i class="fas fa-lightbulb"></i>
                             <h4 style="font-size: 1.2rem; font-weight: 700; color: #001a33; margin-bottom: 0.8rem;">
                                 Innovation</h4>
                             <p class="card-text-pro">Collaborative research and development</p>
                         </div>
-                        <div class="card-pro">
+                        <div class="goal-card">
                             <i class="fas fa-cogs"></i>
                             <h4 style="font-size: 1.2rem; font-weight: 700; color: #001a33; margin-bottom: 0.8rem;">
                                 Applied Research</h4>
                             <p class="card-text-pro">Solutions to real-world challenges</p>
                         </div>
-                        <div class="card-pro">
+                        <div class="goal-card">
                             <i class="fas fa-building"></i>
                             <h4 style="font-size: 1.2rem; font-weight: 700; color: #001a33; margin-bottom: 0.8rem;">
                                 Brand Enhancement</h4>
@@ -415,25 +506,25 @@
 
                 <div class="tab-panel-pro" id="community-pro">
                     <div class="grid-pro-4">
-                        <div class="card-pro">
+                        <div class="goal-card">
                             <i class="fas fa-hands-helping"></i>
                             <h4 style="font-size: 1.2rem; font-weight: 700; color: #001a33; margin-bottom: 0.8rem;">
                                 Social Impact</h4>
                             <p class="card-text-pro">Community development through service-learning</p>
                         </div>
-                        <div class="card-pro">
+                        <div class="goal-card">
                             <i class="fas fa-graduation-cap"></i>
                             <h4 style="font-size: 1.2rem; font-weight: 700; color: #001a33; margin-bottom: 0.8rem;">
                                 Educational Access</h4>
                             <p class="card-text-pro">Expanded educational opportunities</p>
                         </div>
-                        <div class="card-pro">
+                        <div class="goal-card">
                             <i class="fas fa-seedling"></i>
                             <h4 style="font-size: 1.2rem; font-weight: 700; color: #001a33; margin-bottom: 0.8rem;">
                                 Sustainable Development</h4>
                             <p class="card-text-pro">Supporting UN SDGs and initiatives</p>
                         </div>
-                        <div class="card-pro">
+                        <div class="goal-card">
                             <i class="fas fa-heart"></i>
                             <h4 style="font-size: 1.2rem; font-weight: 700; color: #001a33; margin-bottom: 0.8rem;">
                                 Social Welfare</h4>
@@ -446,7 +537,7 @@
     </section>
 
     <!-- FAQ -->
-    <section class="section-pro" style="background: white;">
+    <section class="main-section" style="background: white;">
         <div class="container">
             <div class="section-header-pro">
                 <div class="section-eyebrow">FAQ</div>
@@ -507,10 +598,8 @@
         document.querySelectorAll('.tab-button-pro').forEach(button => {
             button.addEventListener('click', () => {
                 const targetTab = button.getAttribute('data-tab');
-
                 document.querySelectorAll('.tab-button-pro').forEach(btn => btn.classList.remove('active'));
                 document.querySelectorAll('.tab-panel-pro').forEach(panel => panel.classList.remove('active'));
-
                 button.classList.add('active');
                 document.getElementById(targetTab).classList.add('active');
             });
@@ -521,157 +610,217 @@
             header.addEventListener('click', () => {
                 const item = header.parentElement;
                 const isActive = item.classList.contains('active');
-
                 document.querySelectorAll('.accordion-item-pro').forEach(i => i.classList.remove('active'));
-
                 if (!isActive) {
                     item.classList.add('active');
                 }
             });
         });
 
-        // Chart logic
-        // Partnership Growth Chart
+        // PARTNERSHIP GROWTH CHART WITH FILTERS
         const ctx = document.getElementById('partnershipChart');
 
-        const partnershipData = {
-            labels: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
-            datasets: [{
-                label: 'Total Partnerships',
-                data: [25, 32, 38, 45, 58, 72, 85, 98, 115, 128, 133],
-                backgroundColor: 'rgba(0, 51, 102, 0.1)',
-                borderColor: '#003366',
-                borderWidth: 3,
-                fill: true,
-                tension: 0.4,
-                pointBackgroundColor: '#003366',
-                pointBorderColor: '#fff',
-                pointBorderWidth: 2,
-                pointRadius: 6,
-                pointHoverRadius: 8,
-                pointHoverBackgroundColor: '#003366',
-                pointHoverBorderColor: '#fff',
-                pointHoverBorderWidth: 3
-            }]
+        // Dataset from 2000 to 2026
+        const fullPartnershipData = {
+            labels: ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009',
+                '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019',
+                '2020', '2021', '2022', '2023', '2024', '2025', '2026'],
+            data: [2, 3, 5, 7, 9, 12, 15, 18, 22, 26,
+                30, 35, 40, 46, 52, 60, 70, 82, 95, 110,
+                128, 142, 155, 165, 173, 180, 185]
         };
 
-        const config = {
-            type: 'line',
-            data: partnershipData,
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                devicePixelRatio: window.devicePixelRatio || 2, // Add this for better quality
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(0, 26, 51, 0.95)',
-                        titleFont: {
-                            size: 14,
-                            weight: 'bold',
-                            family: "'Inter', sans-serif"
+        let chart;
+
+        function createChart(labels, data) {
+            const chartData = {
+                labels: labels,
+                datasets: [{
+                    label: 'Total Partnerships',
+                    data: data,
+                    backgroundColor: 'rgba(0, 51, 102, 0.1)',
+                    borderColor: '#003366',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#003366',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    pointHoverBackgroundColor: '#003366',
+                    pointHoverBorderColor: '#fff',
+                    pointHoverBorderWidth: 3
+                }]
+            };
+
+            const config = {
+                type: 'line',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    devicePixelRatio: window.devicePixelRatio || 2,
+                    plugins: {
+                        legend: {
+                            display: false
                         },
-                        bodyFont: {
-                            size: 13,
-                            family: "'Inter', sans-serif"
-                        },
-                        padding: 12,
-                        cornerRadius: 8,
-                        displayColors: false,
-                        callbacks: {
-                            label: function (context) {
-                                return 'Partnerships: ' + context.parsed.y;
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 26, 51, 0.95)',
+                            titleFont: {
+                                size: 14,
+                                weight: 'bold',
+                                family: "'Inter', sans-serif"
+                            },
+                            bodyFont: {
+                                size: 13,
+                                family: "'Inter', sans-serif"
+                            },
+                            padding: 12,
+                            cornerRadius: 8,
+                            displayColors: false,
+                            callbacks: {
+                                label: function (context) {
+                                    return 'Partnerships: ' + context.parsed.y;
+                                }
                             }
                         }
-                    }
-                },
-                layout: {
-                    padding: {
-                        top: 10,
-                        bottom: 10,
-                        left: 10,
-                        right: 10
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            font: {
-                                size: 12,
-                                family: "'Inter', sans-serif"
-                            },
-                            color: '#666',
-                            padding: 10
-                        },
-                        grid: {
-                            color: 'rgba(0, 0, 0, 0.05)',
-                            drawBorder: false
-                        },
-                        title: {
-                            display: true,
-                            text: 'Number of Partnerships',
-                            font: {
-                                size: 13,
-                                weight: '600',
-                                family: "'Inter', sans-serif"
-                            },
-                            color: '#001a33'
+                    },
+                    layout: {
+                        padding: {
+                            top: 10,
+                            bottom: 10,
+                            left: 10,
+                            right: 10
                         }
                     },
-                    x: {
-                        ticks: {
-                            font: {
-                                size: 12,
-                                family: "'Inter', sans-serif"
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                font: {
+                                    size: 12,
+                                    family: "'Inter', sans-serif"
+                                },
+                                color: '#666',
+                                padding: 10
                             },
-                            color: '#666',
-                            padding: 10
-                        },
-                        grid: {
-                            display: false,
-                            drawBorder: false
-                        },
-                        title: {
-                            display: true,
-                            text: 'Year',
-                            font: {
-                                size: 13,
-                                weight: '600',
-                                family: "'Inter', sans-serif"
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)',
+                                drawBorder: false
                             },
-                            color: '#001a33'
+                            title: {
+                                display: true,
+                                text: 'Number of Partnerships',
+                                font: {
+                                    size: 13,
+                                    weight: '600',
+                                    family: "'Inter', sans-serif"
+                                },
+                                color: '#001a33'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: {
+                                    size: 12,
+                                    family: "'Inter', sans-serif"
+                                },
+                                color: '#666',
+                                padding: 10
+                            },
+                            grid: {
+                                display: false,
+                                drawBorder: false
+                            },
+                            title: {
+                                display: true,
+                                text: 'Year',
+                                font: {
+                                    size: 13,
+                                    weight: '600',
+                                    family: "'Inter', sans-serif"
+                                },
+                                color: '#001a33'
+                            }
                         }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
                     }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index'
                 }
+            };
+
+            return new Chart(ctx, config);
+        }
+
+        // Filter data based on range
+        function filterData(range) {
+            let labels, data, startYear, endYear;
+
+            if (range === 'all') {
+                labels = fullPartnershipData.labels;
+                data = fullPartnershipData.data;
+                startYear = labels[0];
+                endYear = labels[labels.length - 1];
+            } else {
+                const yearsToShow = parseInt(range);
+                labels = fullPartnershipData.labels.slice(-yearsToShow);
+                data = fullPartnershipData.data.slice(-yearsToShow);
+                startYear = labels[0];
+                endYear = labels[labels.length - 1];
             }
-        };
 
-        const chart = new Chart(ctx, config);
+            // Update chart range label
+            document.getElementById('chart-range-label').textContent =
+                `Annual growth from ${startYear} to ${endYear}`;
 
-        function calculateDynamicStats() {
-            const data = partnershipData.datasets[0].data;
-            const labels = partnershipData.labels;
+            return { labels, data };
+        }
 
-            // Calculate Growth Percentage (first year to last year)
+        // Animate number counting
+        function animateNumber(element, start, end, duration = 1200) {
+            const range = end - start;
+            const increment = range / (duration / 16);
+            let current = start;
+
+            element.classList.add('updating');
+
+            const timer = setInterval(() => {
+                current += increment;
+                if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+                    current = end;
+                    clearInterval(timer);
+                    element.classList.remove('updating');
+                }
+
+                // Format the number
+                if (element.id === 'growthPercentage') {
+                    element.textContent = Math.round(current) + '%';
+                } else if (element.id === 'annualAverage') {
+                    element.textContent = Math.round(current);
+                } else {
+                    element.textContent = current;
+                }
+            }, 16);
+        }
+
+        // Calculate and update statistics with animation
+        function calculateDynamicStats(labels, data) {
+            // Calculate Growth Percentage
             const firstYear = data[0];
             const lastYear = data[data.length - 1];
             const growthPercentage = Math.round(((lastYear - firstYear) / firstYear) * 100);
 
-            // Calculate Average New Partners Annually
+            // Calculate Average
             let totalGrowth = 0;
             for (let i = 1; i < data.length; i++) {
                 totalGrowth += (data[i] - data[i - 1]);
             }
             const annualAverage = Math.round(totalGrowth / (data.length - 1));
 
-            // Find Peak Growth Year (year with highest increase)
+            // Find Peak Year
             let maxGrowth = 0;
             let peakYearIndex = 0;
             for (let i = 1; i < data.length; i++) {
@@ -683,14 +832,68 @@
             }
             const peakYear = labels[peakYearIndex];
 
-            // Update the HTML
-            document.getElementById('growthPercentage').textContent = growthPercentage + '%';
-            document.getElementById('annualAverage').textContent = annualAverage + '+';
-            document.getElementById('peakYear').textContent = peakYear;
+            // Get current values
+            const currentGrowth = parseInt(document.getElementById('growthPercentage').textContent) || 0;
+            const currentAverage = parseInt(document.getElementById('annualAverage').textContent) || 0;
+
+            // Animate the numbers
+            animateNumber(document.getElementById('growthPercentage'), currentGrowth, growthPercentage, 1200);
+            animateNumber(document.getElementById('annualAverage'), currentAverage, annualAverage, 1200);
+
+            // Peak year fades in
+            const peakYearElement = document.getElementById('peakYear');
+            peakYearElement.classList.add('updating');
+            setTimeout(() => {
+                peakYearElement.textContent = peakYear;
+                peakYearElement.classList.remove('updating');
+            }, 500);
         }
 
-        // Call the function to populate stats
-        calculateDynamicStats();
+        // Update chart with filtered data
+        function updateChart(range) {
+            const canvas = document.getElementById('partnershipChart');
+
+            // Add animation class
+            canvas.classList.add('chart-updating');
+
+            setTimeout(() => {
+                const { labels, data } = filterData(range);
+
+                // Update chart data
+                chart.data.labels = labels;
+                chart.data.datasets[0].data = data;
+                chart.update({
+                    duration: 1000,
+                    easing: 'easeInOutQuart'
+                });
+
+                // Update statistics with animation
+                calculateDynamicStats(labels, data);
+
+                // Remove animation class
+                setTimeout(() => {
+                    canvas.classList.remove('chart-updating');
+                }, 300);
+            }, 250);
+        }
+
+        // Initialize chart with all data
+        const initialData = filterData('all');
+        chart = createChart(initialData.labels, initialData.data);
+        calculateDynamicStats(initialData.labels, initialData.data);
+
+        // Filter button event listeners
+        document.querySelectorAll('.chart-filter-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active state
+                document.querySelectorAll('.chart-filter-btn').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Update chart
+                const range = button.getAttribute('data-range');
+                updateChart(range);
+            });
+        });
     </script>
 </body>
 
