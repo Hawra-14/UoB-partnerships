@@ -204,42 +204,6 @@
             font-style: italic;
         }
 
-        .checkbox-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-            margin-top: 0.5rem;
-        }
-
-        .checkbox-row {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 0.5rem;
-        }
-
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .checkbox-item input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            accent-color: #003366;
-            cursor: pointer;
-            flex-shrink: 0;
-        }
-
-        .checkbox-item label {
-            cursor: pointer;
-            font-size: 0.95rem;
-            color: #333;
-            user-select: none;
-        }
-
         .radio-group {
             display: flex;
             flex-direction: row;
@@ -265,13 +229,6 @@
             font-size: 0.95rem;
             color: #333;
             user-select: none;
-        }
-
-        .sdg-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 0.8rem;
-            margin-top: 0.5rem;
         }
 
         .form-actions {
@@ -344,27 +301,149 @@
             min-width: 260px;
         }
 
-        .admin-note {
-            background: #fefce8;
-            border: 1px solid #fde047;
-            border-radius: 8px;
-            padding: 0.8rem 1rem;
-            font-size: 0.85rem;
-            color: #713f12;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        /* Multi-select SDG */
+        .multi-select-wrapper {
+            position: relative;
         }
 
-        .admin-note i {
-            color: #B8860B;
+        .multi-select-display {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            background: white;
+            box-sizing: border-box;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            min-height: 50px;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .multi-select-display:hover,
+        .multi-select-display.open {
+            border-color: #003366;
+            box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
+        }
+
+        .multi-select-placeholder {
+            color: #999;
+            font-size: 1rem;
+        }
+
+        .multi-select-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .sdg-tag {
+            background: #e8f0fe;
+            color: #003366;
+            border-radius: 4px;
+            padding: 3px 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .sdg-tag .tag-remove {
+            cursor: pointer;
+            font-weight: 700;
+            color: #003366;
+            font-size: 0.9rem;
+            line-height: 1;
+        }
+
+        .sdg-tag .tag-remove:hover {
+            color: #dc2626;
+        }
+
+        .multi-select-arrow {
+            color: #666;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            margin-left: 8px;
+            transition: transform 0.2s ease;
+        }
+
+        .multi-select-display.open .multi-select-arrow {
+            transform: rotate(180deg);
+        }
+
+        .multi-select-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #003366;
+            border-radius: 8px;
+            z-index: 100;
+            max-height: 280px;
+            overflow-y: auto;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .multi-select-dropdown.open {
+            display: block;
+        }
+
+        .multi-select-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            cursor: pointer;
+            transition: background 0.15s ease;
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        .multi-select-option:hover {
+            background: #f0f4fa;
+        }
+
+        .multi-select-option.selected {
+            background: #e8f0fe;
+            color: #003366;
+            font-weight: 600;
+        }
+
+        .multi-select-option input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #003366;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .multi-select-dropdown::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .multi-select-dropdown::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .multi-select-dropdown::-webkit-scrollbar-thumb {
+            background: #003366;
+            border-radius: 10px;
         }
     </style>
 </head>
 
 <body>
-    <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-left">
@@ -378,25 +457,16 @@
             </div>
 
             <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="Home.html" class="nav-link">HOME</a>
-                </li>
-                <li class="nav-item">
-                    <a href="partners.html" class="nav-link">PARTNERSHIP</a>
-                </li>
-                <li class="nav-item">
-                    <a href="Initiatives.html" class="nav-link active">INITIATIVES</a>
-                </li>
-                <li class="nav-item">
-                    <a href="Contact.html" class="nav-link">CONTACT</a>
-                </li>
+                <li class="nav-item"><a href="Home.html" class="nav-link">HOME</a></li>
+                <li class="nav-item"><a href="partners.html" class="nav-link">PARTNERSHIP</a></li>
+                <li class="nav-item"><a href="Initiatives.html" class="nav-link active">INITIATIVES</a></li>
+                <li class="nav-item"><a href="Contact.html" class="nav-link">CONTACT</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="form-layout">
 
-        <!-- LEFT SIDEBAR Navigation -->
         <nav class="initiatives-nav">
             <div class="initiatives-nav-container">
                 <div class="initiatives-tabs">
@@ -425,7 +495,6 @@
             </div>
         </nav>
 
-        <!-- FORM CONTENT -->
         <div class="form-content">
             <section class="form-section">
 
@@ -445,7 +514,7 @@
 
                 <form id="initiativeForm">
 
-                    <!-- Section 1: Implementing Entity of the Initiative -->
+                    <!-- Section 1 -->
                     <h2 class="form-section-title" id="implementing-entity">
                         <i class="fas fa-building"></i>
                         Implementing Entity of the Initiative
@@ -458,14 +527,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Implementing Entity within the University <span
-                                class="required">*</span></label>
+                        <label class="form-label">Implementing Entity within the University <span class="required">*</span></label>
                         <select class="form-select" id="implementingEntity" name="implementingEntity" required>
                             <option value="">Select college / deanship / department...</option>
                             <option value="College of Engineering">College of Engineering</option>
                             <option value="College of Science">College of Science</option>
-                            <option value="College of Business Administration">College of Business Administration
-                            </option>
+                            <option value="College of Business Administration">College of Business Administration</option>
                             <option value="College of Arts">College of Arts</option>
                             <option value="College of IT">College of IT</option>
                             <option value="College of Law">College of Law</option>
@@ -506,8 +573,7 @@
 
                     <div class="form-group">
                         <div class="inline-radio-row">
-                            <span class="inline-radio-label">Does this Initiative follow an existing agreement? <span
-                                    class="required">*</span></span>
+                            <span class="inline-radio-label">Does this Initiative follow an existing agreement? <span class="required">*</span></span>
                             <div class="radio-item">
                                 <input type="radio" id="agreementYes" name="followsAgreement" value="Yes"
                                     onchange="toggleAgreementDropdown(this)">
@@ -539,7 +605,7 @@
                         <span class="form-help-text">Select the agreement this initiative is operating under</span>
                     </div>
 
-                    <!-- Section 2: Timing and Location -->
+                    <!-- Section 2 -->
                     <h2 class="form-section-title" id="timing-location">
                         <i class="fas fa-calendar-alt"></i>
                         Timing and Location
@@ -547,11 +613,9 @@
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label class="form-label">Initiative Implementation Date <span
-                                    class="required">*</span></label>
+                            <label class="form-label">Initiative Implementation Date <span class="required">*</span></label>
                             <input type="date" class="form-input" id="startDate" name="startDate" required>
                         </div>
-
                         <div class="form-group">
                             <label class="form-label">Initiative End Date <span class="required">*</span></label>
                             <input type="date" class="form-input" id="endDate" name="endDate" required>
@@ -574,22 +638,21 @@
                         </div>
                     </div>
 
-                    <!-- Section 3: Description and Content -->
+                    <!-- Section 3 -->
                     <h2 class="form-section-title" id="description-content">
                         <i class="fas fa-align-left"></i>
                         Description and Content
                     </h2>
 
                     <div class="form-group">
-                        <label class="form-label">Brief Description of the Initiative and Its Objectives <span
-                                class="required">*</span></label>
+                        <label class="form-label">Brief Description of the Initiative and Its Objectives <span class="required">*</span></label>
                         <textarea class="form-textarea" id="description" name="description" required
                             placeholder="Provide a comprehensive description of the initiative, including objectives, scope, and expected outcomes..."
                             maxlength="1000" style="min-height: 160px;"></textarea>
                         <span class="char-counter" id="descriptionCounter">0 / 1000 characters</span>
                     </div>
 
-                    <!-- Section 4: Beneficiaries and Direct Impact -->
+                    <!-- Section 4 -->
                     <h2 class="form-section-title" id="beneficiaries">
                         <i class="fas fa-users"></i>
                         Beneficiaries and Direct Impact
@@ -599,8 +662,7 @@
                         <label class="form-label">Target Group <span class="required">*</span></label>
                         <input type="text" class="form-input" id="targetGroup" name="targetGroup" required
                             placeholder="e.g., Undergraduate Students, Faculty Members, Local Community">
-                        <span class="form-help-text">Describe the primary audience or beneficiaries of the
-                            initiative</span>
+                        <span class="form-help-text">Describe the primary audience or beneficiaries of the initiative</span>
                     </div>
 
                     <div class="form-group">
@@ -610,7 +672,7 @@
                         <span class="form-help-text">Estimated or actual count of people directly impacted</span>
                     </div>
 
-                    <!-- Section 5: Outputs and Outcomes -->
+                    <!-- Section 5 -->
                     <h2 class="form-section-title" id="outputs">
                         <i class="fas fa-chart-line"></i>
                         Outputs and Outcomes
@@ -623,7 +685,7 @@
                             style="min-height: 140px;"></textarea>
                     </div>
 
-                    <!-- Section 6: Alignment with Classifications -->
+                    <!-- Section 6 -->
                     <h2 class="form-section-title" id="classifications">
                         <i class="fas fa-tags"></i>
                         Alignment with Classifications
@@ -645,8 +707,7 @@
 
                     <div class="form-group">
                         <div class="inline-radio-row">
-                            <span class="inline-radio-label">Does it Support GreenMetric? <span
-                                    class="required">*</span></span>
+                            <span class="inline-radio-label">Does it Support GreenMetric? <span class="required">*</span></span>
                             <div class="radio-item">
                                 <input type="radio" id="greenYes" name="supportsGreenMetric" value="Yes">
                                 <label for="greenYes">Yes</label>
@@ -660,8 +721,7 @@
 
                     <div class="form-group">
                         <div class="inline-radio-row">
-                            <span class="inline-radio-label">Does it Support THE Impact Ranking? <span
-                                    class="required">*</span></span>
+                            <span class="inline-radio-label">Does it Support THE Impact Ranking? <span class="required">*</span></span>
                             <div class="radio-item">
                                 <input type="radio" id="theYes" name="supportsTHE" value="Yes">
                                 <label for="theYes">Yes</label>
@@ -673,57 +733,74 @@
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Primary SDG</label>
-                            <select class="form-select" id="primarySDG" name="primarySDG">
-                                <option value="">Select primary SDG...</option>
-                                <option value="SDG 1">SDG 1: No Poverty</option>
-                                <option value="SDG 2">SDG 2: Zero Hunger</option>
-                                <option value="SDG 3">SDG 3: Good Health and Well-Being</option>
-                                <option value="SDG 4">SDG 4: Quality Education</option>
-                                <option value="SDG 5">SDG 5: Gender Equality</option>
-                                <option value="SDG 6">SDG 6: Clean Water and Sanitation</option>
-                                <option value="SDG 7">SDG 7: Affordable and Clean Energy</option>
-                                <option value="SDG 8">SDG 8: Decent Work and Economic Growth</option>
-                                <option value="SDG 9">SDG 9: Industry, Innovation and Infrastructure</option>
-                                <option value="SDG 10">SDG 10: Reduced Inequalities</option>
-                                <option value="SDG 11">SDG 11: Sustainable Cities and Communities</option>
-                                <option value="SDG 12">SDG 12: Responsible Consumption and Production</option>
-                                <option value="SDG 13">SDG 13: Climate Action</option>
-                                <option value="SDG 14">SDG 14: Life Below Water</option>
-                                <option value="SDG 15">SDG 15: Life on Land</option>
-                                <option value="SDG 16">SDG 16: Peace, Justice and Strong Institutions</option>
-                                <option value="SDG 17">SDG 17: Partnerships for the Goals</option>
-                            </select>
+                    <!-- SDG Multi-Select -->
+                    <div class="form-group">
+                        <label class="form-label">Sustainable Development Goals (SDGs)</label>
+                        <!-- Tags shown ABOVE the dropdown trigger -->
+                        <div class="multi-select-tags" id="sdgTags" style="display:none; flex-wrap:wrap; gap:6px; margin-bottom:8px;"></div>
+                        <div class="multi-select-wrapper" id="sdgWrapper">
+                            <div class="multi-select-display" id="sdgDisplay" onclick="toggleSDGDropdown()">
+                                <span class="multi-select-placeholder" id="sdgPlaceholder">Select SDGs...</span>
+                                <i class="fas fa-chevron-down multi-select-arrow"></i>
+                            </div>
+                            <div class="multi-select-dropdown" id="sdgDropdown">
+                                <div class="multi-select-option" onclick="toggleSDG('SDG 1', 'SDG 1: No Poverty', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 1: No Poverty
+                                </div>
+                                <div class="multi-select-option" onclick="toggleSDG('SDG 2', 'SDG 2: Zero Hunger', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 2: Zero Hunger
+                                </div>
+                                <div class="multi-select-option" onclick="toggleSDG('SDG 3', 'SDG 3: Good Health and Well-Being', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 3: Good Health and Well-Being
+                                </div>
+                                <div class="multi-select-option" onclick="toggleSDG('SDG 4', 'SDG 4: Quality Education', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 4: Quality Education
+                                </div>
+                                <div class="multi-select-option" onclick="toggleSDG('SDG 5', 'SDG 5: Gender Equality', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 5: Gender Equality
+                                </div>
+                                <div class="multi-select-option" onclick="toggleSDG('SDG 6', 'SDG 6: Clean Water and Sanitation', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 6: Clean Water and Sanitation
+                                </div>
+                                <div class="multi-select-option" onclick="toggleSDG('SDG 7', 'SDG 7: Affordable and Clean Energy', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 7: Affordable and Clean Energy
+                                </div>
+                                <div class="multi-select-option" onclick="toggleSDG('SDG 8', 'SDG 8: Decent Work and Economic Growth', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 8: Decent Work and Economic Growth
+                                </div>
+                                <div class="multi-select-option" onclick="toggleSDG('SDG 9', 'SDG 9: Industry, Innovation and Infrastructure', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 9: Industry, Innovation and Infrastructure
+                                </div>
+                                <div class="multi-select-option" onclick="toggleSDG('SDG 10', 'SDG 10: Reduced Inequalities', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 10: Reduced Inequalities
+                                </div>
+                                <div class="multi-select-option" onclick="toggleSDG('SDG 11', 'SDG 11: Sustainable Cities and Communities', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 11: Sustainable Cities and Communities
+                                </div>
+                                <div class="multi-select-option" onclick="toggleSDG('SDG 12', 'SDG 12: Responsible Consumption and Production', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 12: Responsible Consumption and Production
+                                </div>
+                                <div class="multi-select-option" onclick="toggleSDG('SDG 13', 'SDG 13: Climate Action', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 13: Climate Action
+                                </div>
+                                <div class="multi-select-option" onclick="toggleSDG('SDG 14', 'SDG 14: Life Below Water', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 14: Life Below Water
+                                </div>
+                                <div class="multi-select-option" onclick="toggleSDG('SDG 15', 'SDG 15: Life on Land', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 15: Life on Land
+                                </div>
+                                <div class="multi-select-option" onclick="toggleSDG('SDG 16', 'SDG 16: Peace, Justice and Strong Institutions', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 16: Peace, Justice and Strong Institutions
+                                </div>
+                                <div class="multi-select-option" onclick="toggleSDG('SDG 17', 'SDG 17: Partnerships for the Goals', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 17: Partnerships for the Goals
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Secondary SDG</label>
-                            <select class="form-select" id="secondarySDG" name="secondarySDG">
-                                <option value="">Select secondary SDG...</option>
-                                <option value="SDG 1">SDG 1: No Poverty</option>
-                                <option value="SDG 2">SDG 2: Zero Hunger</option>
-                                <option value="SDG 3">SDG 3: Good Health and Well-Being</option>
-                                <option value="SDG 4">SDG 4: Quality Education</option>
-                                <option value="SDG 5">SDG 5: Gender Equality</option>
-                                <option value="SDG 6">SDG 6: Clean Water and Sanitation</option>
-                                <option value="SDG 7">SDG 7: Affordable and Clean Energy</option>
-                                <option value="SDG 8">SDG 8: Decent Work and Economic Growth</option>
-                                <option value="SDG 9">SDG 9: Industry, Innovation and Infrastructure</option>
-                                <option value="SDG 10">SDG 10: Reduced Inequalities</option>
-                                <option value="SDG 11">SDG 11: Sustainable Cities and Communities</option>
-                                <option value="SDG 12">SDG 12: Responsible Consumption and Production</option>
-                                <option value="SDG 13">SDG 13: Climate Action</option>
-                                <option value="SDG 14">SDG 14: Life Below Water</option>
-                                <option value="SDG 15">SDG 15: Life on Land</option>
-                                <option value="SDG 16">SDG 16: Peace, Justice and Strong Institutions</option>
-                                <option value="SDG 17">SDG 17: Partnerships for the Goals</option>
-                            </select>
-                        </div>
+                        <input type="hidden" id="selectedSDGs" name="selectedSDGs">
                     </div>
 
-                    <!-- Section 7: Documentation and Publication -->
+                    <!-- Section 7 -->
                     <h2 class="form-section-title" id="documentation">
                         <i class="fas fa-file-alt"></i>
                         Documentation and Publication
@@ -731,38 +808,36 @@
 
                     <div class="form-group">
                         <div class="inline-radio-row">
-                            <span class="inline-radio-label">Was it Published on the University Website? <span
-                                    class="required">*</span></span>
+                            <span class="inline-radio-label">Was it Published on the University Website? <span class="required">*</span></span>
                             <div class="radio-item">
                                 <input type="radio" id="publishedYes" name="publishedOnWebsite" value="Yes"
-                                    onchange="toggleNewsLink(this)">
+                                    onchange="togglePublicationFields(this)">
                                 <label for="publishedYes">Yes</label>
                             </div>
                             <div class="radio-item">
                                 <input type="radio" id="publishedNo" name="publishedOnWebsite" value="No"
-                                    onchange="toggleNewsLink(this)">
+                                    onchange="togglePublicationFields(this)">
                                 <label for="publishedNo">No</label>
                             </div>
                         </div>
                     </div>
 
+                    <!-- News Link: shown when Yes, required -->
                     <div class="form-group" id="newsLinkGroup" style="display:none;">
-                        <label class="form-label">Initiative News Link</label>
+                        <label class="form-label">Initiative News Link <span class="required">*</span></label>
                         <input type="url" class="form-input" id="newsLink" name="newsLink"
                             placeholder="https://www.uob.edu.bh/news/initiative-announcement">
-                        <span class="form-help-text">Link to the official news article or announcement on the UoB
-                            website</span>
+                        <span class="form-help-text">Link to the official news article or announcement on the UoB website</span>
                     </div>
 
+                    <!-- Evidence Link: shown always after selection, optional when Yes / required when No -->
                     <div class="form-group" id="evidenceLinkGroup" style="display:none;">
-                        <label class="form-label">Photos / Evidence Link</label>
+                        <label class="form-label" id="evidenceLinkLabel">Photos / Evidence Link</label>
                         <input type="url" class="form-input" id="evidenceLink" name="evidenceLink"
                             placeholder="https://drive.google.com/...">
-                        <span class="form-help-text">Link to photos, videos, or supporting evidence (e.g., Google Drive,
-                            OneDrive)</span>
+                        <span class="form-help-text">Link to photos, videos, or supporting evidence (e.g., Google Drive, OneDrive)</span>
                     </div>
 
-                    <!-- Form Actions -->
                     <div class="form-actions">
                         <button type="button" class="btn-draft" onclick="clearAllFields()">
                             Clear All Fields
@@ -775,10 +850,8 @@
                 </form>
             </section>
         </div>
-
     </div>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 University of Bahrain. All rights reserved.</p>
@@ -787,7 +860,7 @@
 
     <script src="script.js"></script>
     <script>
-        // Tab navigation logic
+        // Tab navigation
         const tabButtons = document.querySelectorAll('.initiative-tab-btn');
         const sections = document.querySelectorAll('.form-section-title');
 
@@ -795,28 +868,19 @@
             button.addEventListener('click', () => {
                 const targetId = button.getAttribute('data-target');
                 const targetSection = document.getElementById(targetId);
-
                 tabButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
-
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
 
-        // Update active tab on scroll
         window.addEventListener('scroll', () => {
             let current = '';
-
             sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 250) {
+                if (pageYOffset >= section.offsetTop - 250) {
                     current = section.getAttribute('id');
                 }
             });
-
             tabButtons.forEach(button => {
                 button.classList.remove('active');
                 if (button.getAttribute('data-target') === current) {
@@ -825,35 +889,17 @@
             });
         });
 
-        // Character counter for description
+        // Character counter
         const descriptionTextarea = document.getElementById('description');
         const descriptionCounter = document.getElementById('descriptionCounter');
-
         descriptionTextarea.addEventListener('input', function () {
             const currentLength = this.value.length;
             const maxLength = this.getAttribute('maxlength');
             descriptionCounter.textContent = `${currentLength} / ${maxLength} characters`;
-            if (currentLength > maxLength * 0.9) {
-                descriptionCounter.classList.add('warning');
-            } else {
-                descriptionCounter.classList.remove('warning');
-            }
+            descriptionCounter.classList.toggle('warning', currentLength > maxLength * 0.9);
         });
 
-        function toggleNewsLink(radio) {
-            const newsGroup = document.getElementById('newsLinkGroup');
-            const evidenceGroup = document.getElementById('evidenceLinkGroup');
-            if (radio.value === 'Yes') {
-                newsGroup.style.display = 'block';
-                evidenceGroup.style.display = 'block';
-            } else {
-                newsGroup.style.display = 'none';
-                evidenceGroup.style.display = 'none';
-                document.getElementById('newsLink').value = '';
-                document.getElementById('evidenceLink').value = '';
-            }
-        }
-
+        // Agreement dropdown
         function toggleAgreementDropdown(radio) {
             const group = document.getElementById('agreementDropdownGroup');
             const select = document.getElementById('agreementSelect');
@@ -867,6 +913,106 @@
             }
         }
 
+        // Publication fields logic
+        function togglePublicationFields(radio) {
+            const newsGroup = document.getElementById('newsLinkGroup');
+            const evidenceGroup = document.getElementById('evidenceLinkGroup');
+            const evidenceLabel = document.getElementById('evidenceLinkLabel');
+            const newsLink = document.getElementById('newsLink');
+            const evidenceLink = document.getElementById('evidenceLink');
+
+            if (radio.value === 'Yes') {
+                // News link: shown & required
+                newsGroup.style.display = 'block';
+                newsLink.setAttribute('required', 'required');
+                // Evidence link: shown & optional
+                evidenceGroup.style.display = 'block';
+                evidenceLabel.innerHTML = 'Photos / Evidence Link';
+                evidenceLink.removeAttribute('required');
+            } else {
+                // News link: hidden & not required
+                newsGroup.style.display = 'none';
+                newsLink.removeAttribute('required');
+                newsLink.value = '';
+                // Evidence link: shown & required
+                evidenceGroup.style.display = 'block';
+                evidenceLabel.innerHTML = 'Photos / Evidence Link <span class="required">*</span>';
+                evidenceLink.setAttribute('required', 'required');
+            }
+        }
+
+        // SDG Multi-Select Logic
+        const selectedSDGs = [];
+
+        function toggleSDGDropdown() {
+            const dropdown = document.getElementById('sdgDropdown');
+            const display = document.getElementById('sdgDisplay');
+            const isOpen = dropdown.classList.contains('open');
+            dropdown.classList.toggle('open', !isOpen);
+            display.classList.toggle('open', !isOpen);
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function (e) {
+            const wrapper = document.getElementById('sdgWrapper');
+            if (!wrapper.contains(e.target)) {
+                document.getElementById('sdgDropdown').classList.remove('open');
+                document.getElementById('sdgDisplay').classList.remove('open');
+            }
+        });
+
+        function toggleSDG(value, label, optionEl) {
+            const checkbox = optionEl.querySelector('input[type="checkbox"]');
+            const idx = selectedSDGs.indexOf(value);
+            if (idx === -1) {
+                selectedSDGs.push(value);
+                checkbox.checked = true;
+                optionEl.classList.add('selected');
+            } else {
+                selectedSDGs.splice(idx, 1);
+                checkbox.checked = false;
+                optionEl.classList.remove('selected');
+            }
+            renderSDGTags();
+            document.getElementById('selectedSDGs').value = selectedSDGs.join(', ');
+        }
+
+        // Remove SDG when clicking the "x" on the tag
+        function removeSDG(value) {
+            const idx = selectedSDGs.indexOf(value);
+            if (idx !== -1) {
+                selectedSDGs.splice(idx, 1);
+                // Uncheck the option
+                document.querySelectorAll('.multi-select-option').forEach(opt => {
+                    if (opt.getAttribute('onclick') && opt.getAttribute('onclick').includes(`'${value}'`)) {
+                        opt.querySelector('input[type="checkbox"]').checked = false;
+                        opt.classList.remove('selected');
+                    }
+                });
+            }
+            renderSDGTags();
+            document.getElementById('selectedSDGs').value = selectedSDGs.join(', ');
+        }
+
+        // Render SDG tags above the dropdown
+        function renderSDGTags() {
+            const tagsContainer = document.getElementById('sdgTags');
+            const placeholder = document.getElementById('sdgPlaceholder');
+
+            if (selectedSDGs.length === 0) {
+                tagsContainer.style.display = 'none';
+                tagsContainer.innerHTML = '';
+                placeholder.style.display = 'inline';
+                return;
+            }
+
+            tagsContainer.style.display = 'flex';
+            tagsContainer.innerHTML = selectedSDGs.map(val =>
+                `<span class="sdg-tag">${val} <span class="tag-remove" onclick="event.stopPropagation(); removeSDG('${val}')">×</span></span>`
+            ).join('');
+            placeholder.style.display = 'none';
+        }
+
         // Clear all fields
         function clearAllFields() {
             document.getElementById('initiativeForm').reset();
@@ -877,15 +1023,27 @@
             document.getElementById('evidenceLinkGroup').style.display = 'none';
             document.querySelectorAll('.inline-radio-row, .radio-group').forEach(el => el.style.outline = 'none');
             document.getElementById('validationBanner').style.display = 'none';
+            // Reset SDG
+            selectedSDGs.length = 0;
+            renderSDGTags();
+            document.getElementById('selectedSDGs').value = '';
+            document.getElementById('sdgPlaceholder').style.display = 'inline';
+            document.querySelectorAll('.multi-select-option').forEach(opt => {
+                opt.querySelector('input[type="checkbox"]').checked = false;
+                opt.classList.remove('selected');
+            });
+            // Reset evidence label
+            document.getElementById('evidenceLinkLabel').innerHTML = 'Photos / Evidence Link';
+            document.getElementById('evidenceLink').removeAttribute('required');
+            document.getElementById('newsLink').removeAttribute('required');
         }
 
-        // Submit initiative — highlight invalid fields
+        // Submit
         function submitInitiative() {
             const form = document.getElementById('initiativeForm');
             const banner = document.getElementById('validationBanner');
             let valid = true;
 
-            // Validate regular required fields
             form.querySelectorAll('[required]:not([type="radio"])').forEach(field => {
                 if (!field.value.trim()) {
                     field.style.borderColor = '#dc2626';
@@ -895,22 +1053,20 @@
                 }
             });
 
-            // Validate required radio groups
             const requiredRadioGroups = [
-                'followsAgreement',
-                'supportsQS',
-                'supportsGreenMetric',
-                'supportsTHE',
-                'publishedOnWebsite',
-                'initiativeLocation'
+                'followsAgreement', 'supportsQS', 'supportsGreenMetric',
+                'supportsTHE', 'publishedOnWebsite', 'initiativeLocation'
             ];
 
             requiredRadioGroups.forEach(groupName => {
                 const radios = form.querySelectorAll(`[name="${groupName}"]`);
                 const checked = [...radios].some(r => r.checked);
                 radios.forEach(r => {
-                    r.closest('.inline-radio-row, .radio-group').style.outline = checked ? 'none' : '2px solid #dc2626';
-                    r.closest('.inline-radio-row, .radio-group').style.borderRadius = '6px';
+                    const container = r.closest('.inline-radio-row, .radio-group');
+                    if (container) {
+                        container.style.outline = checked ? 'none' : '2px solid #dc2626';
+                        container.style.borderRadius = '6px';
+                    }
                 });
                 if (!checked) valid = false;
             });
@@ -926,5 +1082,4 @@
         }
     </script>
 </body>
-
 </html>

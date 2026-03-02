@@ -15,9 +15,9 @@
     <style>
         .chart-filter-buttons {
             display: flex;
-            gap: 0.5rem;
+            /* gap: 0.5rem; */
             background: white;
-            padding: 0.4rem;
+            /* padding: 0.4rem; */
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
@@ -56,8 +56,6 @@
             height: 0;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.8s, height 0.8s;
         }
 
         .chart-filter-btn:active::after {
@@ -341,8 +339,8 @@
                         <div class="chart-filter-buttons">
                             <button class="chart-filter-btn" data-range="5" title="Last 5 years">5Y</button>
                             <button class="chart-filter-btn" data-range="10" title="Last 10 years">10Y</button>
-                            <button class="chart-filter-btn" data-range="15" title="Last 15 years">15Y</button>
-                            <button class="chart-filter-btn active" data-range="all" title="All years">All</button>
+                            <button class="chart-filter-btn active" data-range="15" title="Last 15 years">15Y</button>
+                            <button class="chart-filter-btn" data-range="all" title="All years">All</button>
                         </div>
                     </div>
 
@@ -881,7 +879,7 @@
         }
 
         // Initialize chart with all data
-        const initialData = filterData('all');
+        const initialData = filterData('15');
         chart = createChart(initialData.labels, initialData.data);
         calculateDynamicStats(initialData.labels, initialData.data);
 
