@@ -50,7 +50,6 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
 }
 
 /* Navigation Bar */
@@ -1221,11 +1220,11 @@ body {
 
 /* Footer */
 .footer {
-    background-color: var(--primary-color);
+    background-color: #002147;
     color: white;
     text-align: center;
     padding: 20px;
-    margin-top: 60px;
+    /* margin-top: 60px; */
 }
 
 .footer p {
@@ -1530,7 +1529,7 @@ input:checked+.toggle-slider:before {
 }
 
 .partnerships-list {
-    margin: 0 8px 12px 8px;
+    margin: 0 0 12px 15px;
     border: 1.5px solid #e5e7eb;
     border-radius: 5px;
     overflow: hidden;
