@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 
+    </script>
     <style>
         .form-layout {
             display: flex;
@@ -444,6 +445,169 @@
 </head>
 
 <body>
+
+    <!-- Login Modal -->
+    <div id="loginOverlay" style="
+    position: fixed; inset: 0;
+    background: rgba(0, 26, 51, 0.75);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+">
+        <div style="
+        background: #fff;
+        border-radius: 16px;
+        padding: 2.5rem;
+        width: 100%;
+        max-width: 500px;
+        margin: 1rem;
+        box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+        border: 1px solid #dde3ed;
+    ">
+            <div style="
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            background: #e8f0fb; color: #0055a5;
+            font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            padding: 0.3rem 0.75rem; border-radius: 20px;
+            margin-bottom: 2rem;
+        ">
+                <i class="fas fa-lock" style="font-size: 1.2rem;"></i>&nbsp;Access Needed
+            </div>
+
+            <h2 style="font-size: 1.5rem; font-weight: 800; color: #001a33; margin-bottom: 0.4rem; text-align: center;">
+                Staff Sign In
+            </h2>
+            <p style="font-size: 0.88rem; color: #777; margin: 0 1.8rem 1.8rem; line-height: 1.5; text-align: center;">
+                This area is restricted to authorised University of Bahrain staff only.
+            </p>
+
+            <!-- Error box -->
+            <div id="modalError" style="
+            display: none; align-items: center; gap: 0.6rem;
+            background: #fff5f5; border: 1px solid #ffcdd2;
+            border-radius: 8px; padding: 0.7rem 1rem;
+            margin-bottom: 1rem; color: #c62828;
+            font-size: 0.84rem; font-weight: 500;
+        ">
+                <i class="fas fa-exclamation-circle"></i>
+                <span>Incorrect email or password. Please try again.</span>
+            </div>
+
+            <!-- Email -->
+            <div style="margin-bottom: 1.1rem;">
+                <label style="display:block; font-size:0.82rem; font-weight:600; color:#001a33; margin-bottom:0.4rem;">
+                    Email Address
+                </label>
+                <div style="position:relative;">
+                    <i class="fas fa-envelope"
+                        style="position:absolute; left:0.9rem; top:50%; transform:translateY(-50%); color:#bbb; font-size:0.85rem;"></i>
+                    <input type="email" id="modalEmail" placeholder="your@uob.edu.bh" style="
+                    width:100%; padding:0.75rem 1rem 0.75rem 2.5rem;
+                    border:1.5px solid #dde3ed; border-radius:8px;
+                    font-size:0.95rem; font-family:'Inter',sans-serif;
+                    color:#001a33; background:#fafbfd; outline:none;
+                    transition: border-color 0.2s, box-shadow 0.2s;
+                " onfocus="this.style.borderColor='#0055a5'; this.style.boxShadow='0 0 0 3px rgba(0,85,165,0.10)'"
+                        onblur="this.style.borderColor='#dde3ed'; this.style.boxShadow='none'" />
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div style="margin-bottom: 0.5rem;">
+                <label style="display:block; font-size:0.82rem; font-weight:600; color:#001a33; margin-bottom:0.4rem;">
+                    Password
+                </label>
+                <div style="position:relative;">
+                    <i class="fas fa-key"
+                        style="position:absolute; left:0.9rem; top:50%; transform:translateY(-50%); color:#bbb; font-size:0.85rem;"></i>
+                    <input type="password" id="modalPassword" placeholder="••••••••" style="
+                    width:100%; padding:0.75rem 2.5rem 0.75rem 2.5rem;
+                    border:1.5px solid #dde3ed; border-radius:8px;
+                    font-size:0.95rem; font-family:'Inter',sans-serif;
+                    color:#001a33; background:#fafbfd; outline:none;
+                    transition: border-color 0.2s, box-shadow 0.2s;
+                " onfocus="this.style.borderColor='#0055a5'; this.style.boxShadow='0 0 0 3px rgba(0,85,165,0.10)'"
+                        onblur="this.style.borderColor='#dde3ed'; this.style.boxShadow='none'" />
+                    <button type="button" onclick="
+                    const i = document.getElementById('modalPassword');
+                    const ic = this.querySelector('i');
+                    i.type = i.type==='password' ? 'text' : 'password';
+                    ic.classList.toggle('fa-eye'); ic.classList.toggle('fa-eye-slash');
+                " style="position:absolute; right:0.9rem; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:#bbb; font-size:0.85rem; padding:0;">
+                        <i class="fas fa-eye" style="font-size: 1rem;"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sign In Button -->
+            <button id="modalLoginBtn" onclick="handleModalLogin()" style="
+            width:100%; margin-top:1.2rem;
+            padding:0.85rem 1.5rem;
+            background:#003366; color:#fff;
+            border:none; border-radius:8px;
+            font-size:0.98rem; font-weight:700;
+            font-family:'Inter',sans-serif;
+            cursor:pointer; display:flex;
+            align-items:center; justify-content:center; gap:0.6rem;
+            transition: background 0.25s, transform 0.15s, box-shadow 0.25s;
+        " onmouseover="this.style.background='#0055a5'; this.style.transform='translateY(-1px)'"
+                onmouseout="this.style.background='#003366'; this.style.transform='none'">
+                <span>Sign In</span>
+                <!-- <i class="fas fa-arrow-right" style="font-size: 1.2rem;"></i> -->
+            </button>
+
+            <p
+                style="text-align:center; font-size:0.8rem; color:#999; line-height:1.6; margin-top:1.5rem; padding-top:1.2rem; border-top:1px solid #dde3ed;">
+                Don't have an account?<br>
+                Contact <a href="mailto:vppd@uob.edu.bh"
+                    style="color:#0055a5; font-weight:600; text-decoration:none;">vppd@uob.edu.bh</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // ── Test credentials ──
+        const TEST_EMAIL = 'staff@uob.edu.bh';
+        const TEST_PASSWORD = 'Test@1234';
+        // ─────────────────────
+
+        // Block page scroll while modal is open
+        document.body.style.overflow = 'hidden';
+
+        function handleModalLogin() {
+            const email = document.getElementById('modalEmail').value.trim();
+            const password = document.getElementById('modalPassword').value;
+            const errorBox = document.getElementById('modalError');
+            const btn = document.getElementById('modalLoginBtn');
+
+            errorBox.style.display = 'none';
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in…';
+
+            setTimeout(() => {
+                if (email === TEST_EMAIL && password === TEST_PASSWORD) {
+                    // Correct — close the modal
+                    sessionStorage.setItem('loggedIn', 'true');
+                    document.getElementById('loginOverlay').style.display = 'none';
+                    document.body.style.overflow = '';
+                } else {
+                    // Wrong — show error
+                    errorBox.style.display = 'flex';
+                    btn.disabled = false;
+                    btn.innerHTML = '<span>Sign In</span><i class="fas fa-arrow-right"></i>';
+                }
+            }, 800);
+        }
+
+        // Allow pressing Enter to submit
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') handleModalLogin();
+        });
+    </script>
+
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-left">
@@ -527,12 +691,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Implementing Entity within the University <span class="required">*</span></label>
+                        <label class="form-label">Implementing Entity within the University <span
+                                class="required">*</span></label>
                         <select class="form-select" id="implementingEntity" name="implementingEntity" required>
                             <option value="">Select college / deanship / department...</option>
                             <option value="College of Engineering">College of Engineering</option>
                             <option value="College of Science">College of Science</option>
-                            <option value="College of Business Administration">College of Business Administration</option>
+                            <option value="College of Business Administration">College of Business Administration
+                            </option>
                             <option value="College of Arts">College of Arts</option>
                             <option value="College of IT">College of IT</option>
                             <option value="College of Law">College of Law</option>
@@ -573,7 +739,8 @@
 
                     <div class="form-group">
                         <div class="inline-radio-row">
-                            <span class="inline-radio-label">Does this Initiative follow an existing agreement? <span class="required">*</span></span>
+                            <span class="inline-radio-label">Does this Initiative follow an existing agreement? <span
+                                    class="required">*</span></span>
                             <div class="radio-item">
                                 <input type="radio" id="agreementYes" name="followsAgreement" value="Yes"
                                     onchange="toggleAgreementDropdown(this)">
@@ -613,7 +780,8 @@
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label class="form-label">Initiative Implementation Date <span class="required">*</span></label>
+                            <label class="form-label">Initiative Implementation Date <span
+                                    class="required">*</span></label>
                             <input type="date" class="form-input" id="startDate" name="startDate" required>
                         </div>
                         <div class="form-group">
@@ -645,7 +813,8 @@
                     </h2>
 
                     <div class="form-group">
-                        <label class="form-label">Brief Description of the Initiative and Its Objectives <span class="required">*</span></label>
+                        <label class="form-label">Brief Description of the Initiative and Its Objectives <span
+                                class="required">*</span></label>
                         <textarea class="form-textarea" id="description" name="description" required
                             placeholder="Provide a comprehensive description of the initiative, including objectives, scope, and expected outcomes..."
                             maxlength="1000" style="min-height: 160px;"></textarea>
@@ -662,7 +831,8 @@
                         <label class="form-label">Target Group <span class="required">*</span></label>
                         <input type="text" class="form-input" id="targetGroup" name="targetGroup" required
                             placeholder="e.g., Undergraduate Students, Faculty Members, Local Community">
-                        <span class="form-help-text">Describe the primary audience or beneficiaries of the initiative</span>
+                        <span class="form-help-text">Describe the primary audience or beneficiaries of the
+                            initiative</span>
                     </div>
 
                     <div class="form-group">
@@ -707,7 +877,8 @@
 
                     <div class="form-group">
                         <div class="inline-radio-row">
-                            <span class="inline-radio-label">Does it Support GreenMetric? <span class="required">*</span></span>
+                            <span class="inline-radio-label">Does it Support GreenMetric? <span
+                                    class="required">*</span></span>
                             <div class="radio-item">
                                 <input type="radio" id="greenYes" name="supportsGreenMetric" value="Yes">
                                 <label for="greenYes">Yes</label>
@@ -721,7 +892,8 @@
 
                     <div class="form-group">
                         <div class="inline-radio-row">
-                            <span class="inline-radio-label">Does it Support THE Impact Ranking? <span class="required">*</span></span>
+                            <span class="inline-radio-label">Does it Support THE Impact Ranking? <span
+                                    class="required">*</span></span>
                             <div class="radio-item">
                                 <input type="radio" id="theYes" name="supportsTHE" value="Yes">
                                 <label for="theYes">Yes</label>
@@ -737,63 +909,91 @@
                     <div class="form-group">
                         <label class="form-label">Sustainable Development Goals (SDGs)</label>
                         <!-- Tags shown ABOVE the dropdown trigger -->
-                        <div class="multi-select-tags" id="sdgTags" style="display:none; flex-wrap:wrap; gap:6px; margin-bottom:8px;"></div>
+                        <div class="multi-select-tags" id="sdgTags"
+                            style="display:none; flex-wrap:wrap; gap:6px; margin-bottom:8px;"></div>
                         <div class="multi-select-wrapper" id="sdgWrapper">
                             <div class="multi-select-display" id="sdgDisplay" onclick="toggleSDGDropdown()">
                                 <span class="multi-select-placeholder" id="sdgPlaceholder">Select SDGs...</span>
                                 <i class="fas fa-chevron-down multi-select-arrow"></i>
                             </div>
                             <div class="multi-select-dropdown" id="sdgDropdown">
-                                <div class="multi-select-option" onclick="toggleSDG('SDG 1', 'SDG 1: No Poverty', this)">
+                                <div class="multi-select-option"
+                                    onclick="toggleSDG('SDG 1', 'SDG 1: No Poverty', this)">
                                     <input type="checkbox" onclick="event.stopPropagation()"> SDG 1: No Poverty
                                 </div>
-                                <div class="multi-select-option" onclick="toggleSDG('SDG 2', 'SDG 2: Zero Hunger', this)">
+                                <div class="multi-select-option"
+                                    onclick="toggleSDG('SDG 2', 'SDG 2: Zero Hunger', this)">
                                     <input type="checkbox" onclick="event.stopPropagation()"> SDG 2: Zero Hunger
                                 </div>
-                                <div class="multi-select-option" onclick="toggleSDG('SDG 3', 'SDG 3: Good Health and Well-Being', this)">
-                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 3: Good Health and Well-Being
+                                <div class="multi-select-option"
+                                    onclick="toggleSDG('SDG 3', 'SDG 3: Good Health and Well-Being', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 3: Good Health and
+                                    Well-Being
                                 </div>
-                                <div class="multi-select-option" onclick="toggleSDG('SDG 4', 'SDG 4: Quality Education', this)">
+                                <div class="multi-select-option"
+                                    onclick="toggleSDG('SDG 4', 'SDG 4: Quality Education', this)">
                                     <input type="checkbox" onclick="event.stopPropagation()"> SDG 4: Quality Education
                                 </div>
-                                <div class="multi-select-option" onclick="toggleSDG('SDG 5', 'SDG 5: Gender Equality', this)">
+                                <div class="multi-select-option"
+                                    onclick="toggleSDG('SDG 5', 'SDG 5: Gender Equality', this)">
                                     <input type="checkbox" onclick="event.stopPropagation()"> SDG 5: Gender Equality
                                 </div>
-                                <div class="multi-select-option" onclick="toggleSDG('SDG 6', 'SDG 6: Clean Water and Sanitation', this)">
-                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 6: Clean Water and Sanitation
+                                <div class="multi-select-option"
+                                    onclick="toggleSDG('SDG 6', 'SDG 6: Clean Water and Sanitation', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 6: Clean Water and
+                                    Sanitation
                                 </div>
-                                <div class="multi-select-option" onclick="toggleSDG('SDG 7', 'SDG 7: Affordable and Clean Energy', this)">
-                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 7: Affordable and Clean Energy
+                                <div class="multi-select-option"
+                                    onclick="toggleSDG('SDG 7', 'SDG 7: Affordable and Clean Energy', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 7: Affordable and
+                                    Clean Energy
                                 </div>
-                                <div class="multi-select-option" onclick="toggleSDG('SDG 8', 'SDG 8: Decent Work and Economic Growth', this)">
-                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 8: Decent Work and Economic Growth
+                                <div class="multi-select-option"
+                                    onclick="toggleSDG('SDG 8', 'SDG 8: Decent Work and Economic Growth', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 8: Decent Work and
+                                    Economic Growth
                                 </div>
-                                <div class="multi-select-option" onclick="toggleSDG('SDG 9', 'SDG 9: Industry, Innovation and Infrastructure', this)">
-                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 9: Industry, Innovation and Infrastructure
+                                <div class="multi-select-option"
+                                    onclick="toggleSDG('SDG 9', 'SDG 9: Industry, Innovation and Infrastructure', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 9: Industry,
+                                    Innovation and Infrastructure
                                 </div>
-                                <div class="multi-select-option" onclick="toggleSDG('SDG 10', 'SDG 10: Reduced Inequalities', this)">
-                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 10: Reduced Inequalities
+                                <div class="multi-select-option"
+                                    onclick="toggleSDG('SDG 10', 'SDG 10: Reduced Inequalities', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 10: Reduced
+                                    Inequalities
                                 </div>
-                                <div class="multi-select-option" onclick="toggleSDG('SDG 11', 'SDG 11: Sustainable Cities and Communities', this)">
-                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 11: Sustainable Cities and Communities
+                                <div class="multi-select-option"
+                                    onclick="toggleSDG('SDG 11', 'SDG 11: Sustainable Cities and Communities', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 11: Sustainable Cities
+                                    and Communities
                                 </div>
-                                <div class="multi-select-option" onclick="toggleSDG('SDG 12', 'SDG 12: Responsible Consumption and Production', this)">
-                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 12: Responsible Consumption and Production
+                                <div class="multi-select-option"
+                                    onclick="toggleSDG('SDG 12', 'SDG 12: Responsible Consumption and Production', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 12: Responsible
+                                    Consumption and Production
                                 </div>
-                                <div class="multi-select-option" onclick="toggleSDG('SDG 13', 'SDG 13: Climate Action', this)">
+                                <div class="multi-select-option"
+                                    onclick="toggleSDG('SDG 13', 'SDG 13: Climate Action', this)">
                                     <input type="checkbox" onclick="event.stopPropagation()"> SDG 13: Climate Action
                                 </div>
-                                <div class="multi-select-option" onclick="toggleSDG('SDG 14', 'SDG 14: Life Below Water', this)">
+                                <div class="multi-select-option"
+                                    onclick="toggleSDG('SDG 14', 'SDG 14: Life Below Water', this)">
                                     <input type="checkbox" onclick="event.stopPropagation()"> SDG 14: Life Below Water
                                 </div>
-                                <div class="multi-select-option" onclick="toggleSDG('SDG 15', 'SDG 15: Life on Land', this)">
+                                <div class="multi-select-option"
+                                    onclick="toggleSDG('SDG 15', 'SDG 15: Life on Land', this)">
                                     <input type="checkbox" onclick="event.stopPropagation()"> SDG 15: Life on Land
                                 </div>
-                                <div class="multi-select-option" onclick="toggleSDG('SDG 16', 'SDG 16: Peace, Justice and Strong Institutions', this)">
-                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 16: Peace, Justice and Strong Institutions
+                                <div class="multi-select-option"
+                                    onclick="toggleSDG('SDG 16', 'SDG 16: Peace, Justice and Strong Institutions', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 16: Peace, Justice and
+                                    Strong Institutions
                                 </div>
-                                <div class="multi-select-option" onclick="toggleSDG('SDG 17', 'SDG 17: Partnerships for the Goals', this)">
-                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 17: Partnerships for the Goals
+                                <div class="multi-select-option"
+                                    onclick="toggleSDG('SDG 17', 'SDG 17: Partnerships for the Goals', this)">
+                                    <input type="checkbox" onclick="event.stopPropagation()"> SDG 17: Partnerships for
+                                    the Goals
                                 </div>
                             </div>
                         </div>
@@ -808,7 +1008,8 @@
 
                     <div class="form-group">
                         <div class="inline-radio-row">
-                            <span class="inline-radio-label">Was it Published on the University Website? <span class="required">*</span></span>
+                            <span class="inline-radio-label">Was it Published on the University Website? <span
+                                    class="required">*</span></span>
                             <div class="radio-item">
                                 <input type="radio" id="publishedYes" name="publishedOnWebsite" value="Yes"
                                     onchange="togglePublicationFields(this)">
@@ -827,7 +1028,8 @@
                         <label class="form-label">Initiative News Link <span class="required">*</span></label>
                         <input type="url" class="form-input" id="newsLink" name="newsLink"
                             placeholder="https://www.uob.edu.bh/news/initiative-announcement">
-                        <span class="form-help-text">Link to the official news article or announcement on the UoB website</span>
+                        <span class="form-help-text">Link to the official news article or announcement on the UoB
+                            website</span>
                     </div>
 
                     <!-- Evidence Link: shown always after selection, optional when Yes / required when No -->
@@ -835,7 +1037,8 @@
                         <label class="form-label" id="evidenceLinkLabel">Photos / Evidence Link</label>
                         <input type="url" class="form-input" id="evidenceLink" name="evidenceLink"
                             placeholder="https://drive.google.com/...">
-                        <span class="form-help-text">Link to photos, videos, or supporting evidence (e.g., Google Drive, OneDrive)</span>
+                        <span class="form-help-text">Link to photos, videos, or supporting evidence (e.g., Google Drive,
+                            OneDrive)</span>
                     </div>
 
                     <div class="form-actions">
@@ -1082,4 +1285,5 @@
         }
     </script>
 </body>
+
 </html>
